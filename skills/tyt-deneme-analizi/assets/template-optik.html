@@ -1,0 +1,613 @@
+<title>Bir Yılın Optiği</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Onest:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#FBF7F6; --paper-2:#F5EDEC; --card:#FFFFFF;
+  --graphite:#24212A; --text:#2E2A33; --muted:#6F6772; --faint:#A69BA5;
+  --ink:#C8365C; --ink-2:#E77A97; --ink-soft:#F3D6DE; --ink-wash:#FBEAEF;
+  --rule:#E7D8DB; --rule-2:#D8C3C8;
+  --good:#1F8A5B; --bad:#C8365C;
+  --s-tr:#E0692B; --s-mat:#3C5FD6; --s-fiz:#0F9D8C; --s-kim:#8A4FC4; --s-bio:#45A152;
+  --s-tar:#A9772F; --s-cog:#6F8A2E; --s-fel:#A0719A; --s-din:#5F7486;
+  --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",sans-serif;
+  --f-body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#17141A; --paper-2:#1F1B23; --card:#221E27;
+    --graphite:#F1EBEF; --text:#E6DFE5; --muted:#A99FAB; --faint:#6F6573;
+    --ink:#F0648A; --ink-2:#B84466; --ink-soft:#4B2433; --ink-wash:#2A1A22;
+    --rule:#352E3A; --rule-2:#463D4B; --good:#4CC38A; --bad:#F0648A;
+    --s-tr:#F08A4B; --s-mat:#7B97F2; --s-fiz:#2FC4B0; --s-kim:#B084E6; --s-bio:#6CC476;
+    --s-tar:#D29C55; --s-cog:#A3BD55; --s-fel:#CE98C8; --s-din:#90A4B6;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#17141A; --paper-2:#1F1B23; --card:#221E27;
+  --graphite:#F1EBEF; --text:#E6DFE5; --muted:#A99FAB; --faint:#6F6573;
+  --ink:#F0648A; --ink-2:#B84466; --ink-soft:#4B2433; --ink-wash:#2A1A22;
+  --rule:#352E3A; --rule-2:#463D4B; --good:#4CC38A; --bad:#F0648A;
+  --s-tr:#F08A4B; --s-mat:#7B97F2; --s-fiz:#2FC4B0; --s-kim:#B084E6; --s-bio:#6CC476;
+  --s-tar:#D29C55; --s-cog:#A3BD55; --s-fel:#CE98C8; --s-din:#90A4B6;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--text);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:28px 64px}
+.mono{font-family:var(--f-mono)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- form header ---------- */
+.formhead{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:stretch;border:1.5px solid var(--ink);border-radius:3px;padding:12px;position:relative}
+.formhead::before,.formhead::after{content:"";position:absolute;width:10px;height:10px;background:var(--graphite)}
+.formhead::before{left:-1.5px;top:-1.5px}.formhead::after{right:-1.5px;bottom:-1.5px}
+.timing{display:grid;grid-template-rows:repeat(6,1fr);gap:5px;padding-block:2px}
+.timing i{display:block;width:16px;height:6px;background:var(--graphite)}
+.fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.field{border:1px solid var(--ink-2);padding:6px 9px 7px;border-radius:2px;min-width:0}
+.field .lbl{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.field .val{font-family:var(--f-display);font-weight:800;font-size:26px;line-height:1.05;color:var(--graphite);letter-spacing:.01em}
+.field .val small{font-size:14px;font-weight:600;color:var(--muted);margin-left:3px}
+
+/* ---------- hero ---------- */
+.hero{margin-top:38px;display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+h1{font-family:var(--f-display);font-weight:900;font-size:clamp(56px,10vw,128px);line-height:.86;letter-spacing:-.01em;margin:6px 0 0;color:var(--graphite);text-transform:uppercase;text-wrap:balance}
+h1 em{font-style:normal;color:var(--ink)}
+.lede{max-width:62ch;font-size:17px;color:var(--text);margin:14px 0 0}
+.lede b{color:var(--graphite)}
+.sheet{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:18px 18px 12px;position:relative}
+.sheet-scroll{overflow-x:auto;overflow-y:hidden}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;font-size:12px;color:var(--muted);margin-top:8px}
+.legend .sw{display:inline-flex;align-items:center;gap:6px}
+.bub{display:inline-block;width:11px;height:11px;border-radius:50%;border:1px solid var(--ink-2)}
+
+/* ---------- sections ---------- */
+section{margin-top:72px}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:end;border-bottom:1.5px solid var(--graphite);padding-bottom:10px;margin-bottom:22px}
+.sec-no{font-family:var(--f-display);font-weight:900;font-size:56px;line-height:.8;color:var(--ink);grid-row:span 2}
+h2{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,4.4vw,44px);line-height:.95;margin:0;color:var(--graphite);text-transform:uppercase;letter-spacing:.005em;text-wrap:balance}
+.sec-sub{color:var(--muted);font-size:14px;max-width:70ch;margin:0}
+h3{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:.02em;text-transform:uppercase;margin:0;color:var(--graphite)}
+.note{font-size:12.5px;color:var(--muted)}
+
+.grid-2{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:18px}
+.panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+
+/* karne */
+.karne{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--rule)}
+.stat{padding:14px 4px 14px 0;border-bottom:1px solid var(--rule)}
+.stat:nth-child(odd){padding-right:14px;border-right:1px solid var(--rule)}
+.stat:nth-child(even){padding-left:14px}
+.stat .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-family:var(--f-display);font-weight:800;font-size:40px;line-height:1;color:var(--graphite);margin-top:4px}
+.stat .v small{font-size:18px;color:var(--muted);font-weight:600}
+.stat .d{font-size:12.5px;color:var(--muted);margin-top:3px}
+.up{color:var(--good);font-weight:600}.down{color:var(--bad);font-weight:600}
+.findings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:22px}
+.finding{border-top:3px solid var(--c,var(--ink));padding-top:10px}
+.finding .t{font-weight:700;color:var(--graphite);font-size:15px;line-height:1.3}
+.finding p{margin:6px 0 0;font-size:13.5px;color:var(--muted)}
+.finding .big{font-family:var(--f-display);font-weight:900;font-size:34px;line-height:1;color:var(--c,var(--ink))}
+
+/* multiples */
+.multiples{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.mcard{background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:12px 12px 6px}
+.mcard .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.mcard .name{font-family:var(--f-display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:center;gap:8px}
+.mcard .name i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.chip{font-family:var(--f-mono);font-size:11.5px;padding:2px 7px;border-radius:99px;background:var(--paper-2);color:var(--muted);white-space:nowrap}
+.chip.up{background:color-mix(in srgb,var(--good) 14%,transparent);color:var(--good)}
+.chip.down{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
+.mcard .sub{font-size:12px;color:var(--muted)}
+
+/* tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tab{font:600 13px/1 var(--f-body);padding:8px 12px;border-radius:99px;border:1px solid var(--rule-2);background:transparent;color:var(--text);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.tab i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.tab:hover{border-color:var(--graphite)}
+.tab[aria-selected="true"]{background:var(--graphite);color:var(--paper);border-color:var(--graphite)}
+.tab:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.scroll-x{overflow-x:auto}
+
+/* svg text */
+svg{display:block;max-width:none}
+svg text{font-family:var(--f-body);fill:var(--muted);font-size:11px}
+svg .axis-l{font-family:var(--f-mono);font-size:10.5px;fill:var(--muted)}
+svg .lbl-strong{fill:var(--graphite);font-weight:600;font-size:12px}
+svg .disp{font-family:var(--f-display);font-weight:800;fill:var(--graphite)}
+.gridline{stroke:var(--rule);stroke-width:1}
+
+.tip{position:fixed;pointer-events:none;z-index:20;background:var(--graphite);color:var(--paper);font-size:12.5px;line-height:1.45;padding:9px 11px;border-radius:4px;max-width:280px;box-shadow:0 8px 24px rgba(0,0,0,.18);opacity:0;transition:opacity .12s}
+.tip b{font-weight:700}
+.tip .m{font-family:var(--f-mono);font-size:11px;opacity:.75}
+
+.method{margin-top:72px;border-top:1px dashed var(--rule-2);padding-top:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;font-size:13px;color:var(--muted)}
+.method b{color:var(--text);display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+
+@media (max-width:900px){
+  .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-2,.karne{grid-template-columns:minmax(0,1fr)}
+  .findings{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .multiples{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .method{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .multiples,.findings{grid-template-columns:minmax(0,1fr)}
+  .timing{display:none}.formhead{grid-template-columns:minmax(0,1fr)}
+  .field .val{font-size:22px}
+  .sec-no{font-size:42px}
+  .stat .v{font-size:32px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="formhead" aria-label="Özet">
+    <div class="timing" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="fields" id="fields"></div>
+  </header>
+
+  <div class="hero">
+    <div>
+      <div class="eyebrow">TYT · deneme takip analizi · Tablo: TYT Ayrıntı</div>
+      <h1>Bir yılın <em>optiği</em></h1>
+      <p class="lede" id="lede"></p>
+    </div>
+    <div class="sheet">
+      <div class="sheet-scroll" id="hero"></div>
+      <div class="legend">
+        <span class="sw"><span class="bub" style="background:var(--graphite)"></span>tam doğru</span>
+        <span class="sw"><span class="bub" style="background:color-mix(in srgb,var(--graphite) 45%,transparent)"></span>kısmi</span>
+        <span class="sw"><span class="bub" style="background:var(--ink)"></span>%70 altı</span>
+        <span class="sw"><span class="bub"></span>deneme yok</span>
+        <span>Her sütun bir deneme, her satır bir ders. Soldan sağa zaman; D1-D7 tablodaki dönem blokları.</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="genel-bakis">
+    <div class="sec-head"><div class="sec-no">A</div><h2>Öğrencinin karnesi</h2><p class="sec-sub">İlk dönem ile her dersin en son dönemi yan yana. Radar dışa doğru genişledikçe başarı artıyor.</p></div>
+    <div class="karne">
+      <div class="panel"><div class="panel-head"><h3>Ders profili</h3><span class="note" id="radar-legend"></span></div><div id="radar"></div></div>
+      <div class="panel"><div class="panel-head"><h3>Sayılarla</h3><span class="note">doğru sayıları, deneme ortalamaları</span></div><div class="stats" id="stats"></div></div>
+    </div>
+    <div class="findings" id="findings"></div>
+  </section>
+
+  <section id="genel-gelisim">
+    <div class="sec-head"><div class="sec-no">B</div><h2>Genel gelişim</h2><p class="sec-sub">Solda her deneme tek bir nokta: Türkçe, matematik ve fen doğrularının toplamı (100 soru). 9 dersin hepsinin işlendiği denemelerde 120 üzerinden toplam da halka olarak görünür. Sağda alanlara göre dönem ortalaması.</p></div>
+    <div class="grid-2">
+      <div class="panel"><div class="panel-head"><h3>Deneme deneme doğru</h3><span class="note" id="exam-legend"></span></div><div id="stack"></div></div>
+      <div class="panel"><div class="panel-head"><h3>Alan bazında başarı</h3><span class="note">doğru / soru, dönem ortalaması</span></div><div id="areas"></div></div>
+    </div>
+  </section>
+
+  <section id="dersler">
+    <div class="sec-head"><div class="sec-no">C</div><h2>Ders ders gelişim</h2><p class="sec-sub">Her nokta bir deneme, çizgi 9 denemelik hareketli ortalama. Rozet ilk dönemden son döneme başarı değişimini gösterir.</p></div>
+    <div class="multiples" id="multiples"></div>
+  </section>
+
+  <section id="konular">
+    <div class="sec-head"><div class="sec-no">D</div><h2>Konu haritası</h2><p class="sec-sub">Her hücre: o dönemde 10 denemede o konudan kaçırılan soru sayısı. Koyu hücreler açılıyorsa konu kapanmış demektir.</p></div>
+    <div class="tabs" id="tabs" role="tablist" aria-label="Ders seç"></div>
+    <div class="panel"><div class="scroll-x" id="heat"></div></div>
+  </section>
+
+  <section id="kacanlar">
+    <div class="sec-head"><div class="sec-no">E</div><h2>En çok kaçırılanlar</h2><p class="sec-sub">Tüm yıl boyunca işaretlenen her yanlış veya boş soru. Solda konu sıralaması, sağda her balon tek bir soru.</p></div>
+    <div class="grid-2">
+      <div class="panel"><div class="panel-head"><h3>İlk 16 konu</h3><span class="note">toplam kaçırılan soru</span></div><div id="topbars"></div></div>
+      <div class="panel"><div class="panel-head"><h3 id="waffle-title">Kaçırılan sorular</h3><span class="note">1 balon = 1 soru</span></div><div id="waffle"></div></div>
+    </div>
+  </section>
+
+  <section id="yayinlar">
+    <div class="sec-head"><div class="sec-no">F</div><h2>Yayın zorluğu</h2><p class="sec-sub">Yayın adı yazılı denemelerde ortalama başarı (tüm dersler, yüzde olarak). Kısaltmalar tablodaki gibi korunmuştur; en az 8 denemesi olan yayınlar.</p></div>
+    <div class="panel"><div id="pubs"></div></div>
+  </section>
+
+  <footer class="method">
+    <div><b>Kaynak</b>“TAKİP TYT LGS.xlsx” dosyasının “TYT AYRINTI” sekmesi. Her ders bloğunun “toplam” satırı doğru sayısı, konu satırlarındaki her “X” bir kaçırılan soru olarak okundu.</div>
+    <div><b>Zaman</b>Tablodaki 7 yan yana blok soldan sağa kronolojik kabul edildi (D1-D7). Tarih yazılı olmadığından her blok bir dönem, blok içi sıra deneme sırası.</div>
+    <div><b>Sınırlar</b>Yanlış ile boş ayrılmadığından net değil doğru sayısı gösterilir. Sosyal dersler D4-D5 sonrasında takip edilmemiş; ortalama sütunları hesaba katılmadı.</div>
+  </footer>
+</div>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script type="application/json" id="data">__DATA__</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+(function(){
+const RAW = JSON.parse(document.getElementById('data').textContent);
+const META = {
+  'Türkçe':{k:'tr',short:'TÜR',group:'Türkçe'},
+  'Matematik':{k:'mat',short:'MAT',group:'Matematik'},
+  'Fizik':{k:'fiz',short:'FİZ',group:'Fen'},
+  'Kimya':{k:'kim',short:'KİM',group:'Fen'},
+  'Biyoloji':{k:'bio',short:'BİY',group:'Fen'},
+  'Tarih':{k:'tar',short:'TAR',group:'Sosyal'},
+  'Coğrafya':{k:'cog',short:'COĞ',group:'Sosyal'},
+  'Felsefe':{k:'fel',short:'FEL',group:'Sosyal'},
+  'Din':{k:'din',short:'DİN',group:'Sosyal'}
+};
+const ORDER = ['Türkçe','Matematik','Fizik','Kimya','Biyoloji','Tarih','Coğrafya','Felsefe','Din'];
+const S = ORDER.map(n => RAW.find(s => s.name === n));
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const col = name => `var(--s-${META[name].k})`;
+const colHex = name => css(`--s-${META[name].k}`);
+const ND = 7, DLAB = d => 'D' + (d+1);
+const fmt1 = d3.formatLocale({decimal:',',thousands:'.',grouping:[3],currency:['₺','']});
+const f1 = fmt1.format(',.1f'), f0 = fmt1.format(',.0f'), fpct = v => '%' + fmt1.format('.0f')(v*100), fpct1 = v => '%' + fmt1.format('.1f')(v*100);
+
+// ---------- derived data ----------
+// every sheet column is one full TYT exam; subjects share the column
+const examMap = new Map();
+S.forEach(s => s.tests.forEach(t => { if (!examMap.has(t.x)) examMap.set(t.x, {x:t.x, d:t.d, subs:{}}); examMap.get(t.x).subs[s.name] = t; }));
+const EX = [...examMap.values()].sort((a,b) => a.x - b.x);
+const perD = d3.range(ND).map(d => EX.filter(e => e.d === d));
+perD.forEach((arr,d) => arr.forEach((e,i) => { e.i = i; e.n = arr.length; e.t = d + (i + .5) / arr.length; e.no = EX.indexOf(e) + 1; }));
+const CORE = ['Türkçe','Matematik','Fizik','Kimya','Biyoloji'];
+EX.forEach(e => {
+  e.full = ORDER.every(n => e.subs[n]);
+  e.core = CORE.every(n => e.subs[n]) ? d3.sum(CORE, n => e.subs[n].c) : null;
+  e.total = e.full ? d3.sum(ORDER, n => e.subs[n].c) : null;
+});
+S.forEach(s => {
+  const byD = d3.group(s.tests, t => t.d);
+  s.periods = [];
+  for (let d = 0; d < ND; d++) {
+    const arr = byD.get(d) || [];
+    arr.forEach(t => { const e = examMap.get(t.x); t.t = e.t; t.i = e.i; t.no = e.no; t.pct = t.c / s.max; t.s = s.name; });
+    s.periods.push(arr.length ? {d, n:arr.length, avg:d3.mean(arr, t => t.c), pct:d3.mean(arr, t => t.pct)} : null);
+  }
+  const present = s.periods.filter(Boolean);
+  s.first = present[0]; s.last = present[present.length-1];
+  s.miss = new Map();
+  s.tests.forEach(t => Object.entries(t.m).forEach(([k,v]) => s.miss.set(k, (s.miss.get(k)||0) + v)));
+  s.totalMiss = d3.sum([...s.miss.values()]);
+  const w = 9;
+  s.roll = s.tests.map((t,i) => { const a = s.tests.slice(Math.max(0,i-4), Math.min(s.tests.length, i+5)); return {t:t.t, v:d3.mean(a, x => x.c)}; });
+});
+const totalTests = d3.sum(S, s => s.tests.length);
+const nExams = EX.length;
+const fullEx = EX.filter(e => e.full), coreEx = EX.filter(e => e.core != null);
+const bestFull = d3.greatest(fullEx, e => e.total);
+coreEx.forEach((e,i) => { const a = coreEx.slice(Math.max(0,i-4), Math.min(coreEx.length, i+5)); e.coreRoll = d3.mean(a, x => x.core); });
+const totalMiss = d3.sum(S, s => s.totalMiss);
+// estimated /120 per dönem
+const est = d3.range(ND).map(d => {
+  const segs = S.map(s => {
+    let p = s.periods[d], carried = false;
+    if (!p) { for (let e = d-1; e >= 0; e--) if (s.periods[e]) { p = s.periods[e]; carried = true; break; } }
+    if (!p) { p = s.first; carried = true; }
+    return {s:s.name, v:p.avg, carried};
+  });
+  return {d, segs, total:d3.sum(segs, x => x.v), measured: segs.filter(x => !x.carried).length};
+});
+const estFirst = est[0].total;
+const estPeak = d3.max(est.slice(0,6), e => e.total);
+const estLatestFull = est[5];
+const groups = ['Türkçe','Matematik','Fen','Sosyal'];
+const groupSeries = groups.map(g => ({g, pts: d3.range(ND).map(d => {
+  const subs = S.filter(s => META[s.name].group === g && s.periods[d]);
+  if (!subs.length) return null;
+  return {d, v: d3.sum(subs, s => s.periods[d].avg) / d3.sum(subs, s => s.max)};
+}).filter(Boolean)}));
+
+// ---------- tooltip ----------
+const tip = document.getElementById('tip');
+function showTip(html, ev){ tip.innerHTML = html; tip.style.opacity = 1; moveTip(ev); }
+function moveTip(ev){ const pad = 14, r = tip.getBoundingClientRect(); let x = ev.clientX + pad, y = ev.clientY + pad; if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - pad; if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - pad; tip.style.left = x + 'px'; tip.style.top = y + 'px'; }
+function hideTip(){ tip.style.opacity = 0; }
+function testTip(t){
+  const s = S.find(x => x.name === t.s);
+  const m = Object.entries(t.m).sort((a,b) => b[1]-a[1]).map(([k,v]) => `${k}${v>1?' ×'+v:''}`).join(', ');
+  return `<b>${t.s}</b> · ${t.no}. deneme (${DLAB(t.d)})<br><span class="num">${t.c}/${s.max} doğru</span> (${fpct(t.pct)})${t.p?`<br><span class="m">yayın: ${t.p}</span>`:''}${m?`<br><span class="m">kaçan: ${m}</span>`:''}`;
+}
+
+// ---------- header fields + lede ----------
+const up = (a,b) => b - a;
+document.getElementById('fields').innerHTML = [
+  ['Sınav', 'TYT', ''],
+  ['Deneme', f0(nExams), ''],
+  ['Kaçırılan soru', f0(totalMiss), ''],
+  ['En iyi tam deneme', f0(bestFull.total), '/120']
+].map(([l,v,s]) => `<div class="field"><div class="lbl">${l}</div><div class="val num">${v}<small>${s}</small></div></div>`).join('');
+const fen = ['Fizik','Kimya','Biyoloji'].map(n => S.find(s => s.name === n));
+const fenFirst = d3.sum(fen, s => s.first.avg) / 20, fenLast = d3.sum(fen, s => s.last.avg) / 20;
+document.getElementById('lede').innerHTML =
+  `Bir öğrenci, 7 dönem boyunca <b>${f0(nExams)} TYT denemesi</b> çözdü ve kaçırdığı her soruyu konusuyla birlikte işaretledi. Türkçe ve matematikte zaten yüksek başlayan bu öğrencinin asıl hikâyesi fen: ilk dönemde <b>${fpct(fenFirst)}</b> olan fen başarısı son dönemde <b>${fpct(fenLast)}</b>'e çıktı. Türkçe + matematik + fen toplamı ilk dönemde 100 soruda <b>${f1(d3.mean(coreEx.filter(e=>e.d===0),e=>e.core))}</b> iken son dönemlerde <b>${f1(d3.mean(coreEx.filter(e=>e.d>=3),e=>e.core))}</b> doğruya oturdu.`;
+
+// ---------- HERO: optic bubble sheet ----------
+function drawHero(){
+  const el = document.getElementById('hero'); el.innerHTML = '';
+  const slots = perD.map(a => a.length);
+  const gapSlots = 1.6, totalSlots = d3.sum(slots) + gapSlots * (ND-1);
+  const avail = el.clientWidth, labelW = 46, rightW = 44;
+  const step = Math.max(6.2, (avail - labelW - rightW) / totalSlots);
+  const W = labelW + rightW + step * totalSlots, rowH = Math.max(15, Math.min(22, step*2.3)), top = 22;
+  const H = top + rowH * S.length + 6;
+  const r = Math.min(step * .40, rowH * .33);
+  const startX = []; let acc = labelW;
+  slots.forEach((n,d) => { startX.push(acc); acc += (n + gapSlots) * step; });
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).attr('role','img').attr('aria-label','Tüm denemelerin ders bazında başarı haritası');
+  // period labels + separators
+  slots.forEach((n,d) => {
+    svg.append('text').attr('class','axis-l').attr('x', startX[d]).attr('y', 11).text(DLAB(d)).style('fill','var(--ink)').style('font-weight',600);
+    if (d) svg.append('line').attr('x1', startX[d] - gapSlots*step/2).attr('x2', startX[d] - gapSlots*step/2).attr('y1', 2).attr('y2', H-2).attr('stroke','var(--ink-soft)').attr('stroke-dasharray','2 3');
+  });
+  S.forEach((s,row) => {
+    const y = top + row*rowH + rowH/2;
+    svg.append('text').attr('x', 0).attr('y', y+4).attr('class','axis-l').style('fill','var(--graphite)').style('font-weight',600).text(META[s.name].short);
+    svg.append('text').attr('x', W).attr('y', y+4).attr('text-anchor','end').attr('class','axis-l').text(fpct(d3.mean(s.tests, t => t.pct)));
+    // empty slots
+    EX.filter(e => !e.subs[s.name]).forEach(e => {
+      const d = e.d, i = e.i;
+      svg.append('circle').attr('cx', startX[d] + (i+.5)*step).attr('cy', y).attr('r', r).attr('fill','none').attr('stroke','var(--ink-soft)').attr('stroke-width',1);
+    });
+    svg.append('g').selectAll('circle').data(s.tests).join('circle')
+      .attr('cx', t => startX[t.d] + (t.i+.5)*step).attr('cy', y).attr('r', r)
+      .attr('stroke', 'var(--ink-2)').attr('stroke-width', .8)
+      .attr('fill', t => t.pct < .7 ? 'var(--ink)' : 'var(--graphite)')
+      .attr('fill-opacity', t => t.pct < .7 ? .95 : (t.pct >= 1 ? 1 : .18 + .6 * Math.pow((t.pct - .7)/.3, 1.6)))
+      .style('cursor','pointer')
+      .on('mouseenter', (ev,t) => showTip(testTip(t), ev)).on('mousemove', moveTip).on('mouseleave', hideTip)
+      .attr('opacity', 1)
+      .call(sel => { if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !drawHero.done) sel.attr('r', 0).transition().delay(t => t.t * 110 + row * 25).duration(260).attr('r', r); });
+  });
+  drawHero.done = true;
+}
+
+// ---------- RADAR ----------
+function drawRadar(){
+  const el = document.getElementById('radar'); el.innerHTML = '';
+  const W = Math.min(el.clientWidth, 460), H = W * .92, cx = W/2, cy = H/2 + 4, R = Math.min(W, H)/2 - 44;
+  const lo = .4, rs = d3.scaleLinear([lo, 1], [0, R]);
+  const ang = i => -Math.PI/2 + i * 2*Math.PI / S.length;
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H).style('margin','0 auto');
+  [.5,.6,.7,.8,.9,1].forEach(v => {
+    svg.append('path').attr('d', d3.line().curve(d3.curveLinearClosed)(S.map((s,i) => [cx + rs(v)*Math.cos(ang(i)), cy + rs(v)*Math.sin(ang(i))]))).attr('fill','none').attr('stroke', v===1 ? 'var(--rule-2)' : 'var(--rule)');
+    svg.append('text').attr('class','axis-l').attr('x', cx + 3).attr('y', cy - rs(v) + 11).text(fpct(v)).style('font-size','9px');
+  });
+  S.forEach((s,i) => {
+    svg.append('line').attr('x1', cx).attr('y1', cy).attr('x2', cx + R*Math.cos(ang(i))).attr('y2', cy + R*Math.sin(ang(i))).attr('stroke','var(--rule)');
+    const lx = cx + (R+22)*Math.cos(ang(i)), ly = cy + (R+22)*Math.sin(ang(i));
+    svg.append('text').attr('x', lx).attr('y', ly+4).attr('text-anchor', Math.abs(Math.cos(ang(i))) < .2 ? 'middle' : (Math.cos(ang(i)) > 0 ? 'start' : 'end')).attr('class','lbl-strong').style('fill', col(s.name)).text(s.name);
+  });
+  const shape = key => S.map((s,i) => { const v = Math.max(lo, s[key].pct); return [cx + rs(v)*Math.cos(ang(i)), cy + rs(v)*Math.sin(ang(i))]; });
+  const line = d3.line().curve(d3.curveLinearClosed);
+  svg.append('path').attr('d', line(shape('first'))).attr('fill','var(--ink)').attr('fill-opacity',.08).attr('stroke','var(--ink)').attr('stroke-width',1.5).attr('stroke-dasharray','4 3');
+  svg.append('path').attr('d', line(shape('last'))).attr('fill','var(--graphite)').attr('fill-opacity',.12).attr('stroke','var(--graphite)').attr('stroke-width',2);
+  S.forEach((s,i) => ['first','last'].forEach(k => {
+    const v = Math.max(lo, s[k].pct);
+    svg.append('circle').attr('cx', cx + rs(v)*Math.cos(ang(i))).attr('cy', cy + rs(v)*Math.sin(ang(i))).attr('r', k==='last'?4:3)
+      .attr('fill', k==='last' ? 'var(--graphite)' : 'var(--card)').attr('stroke', k==='last' ? 'var(--card)' : 'var(--ink)').attr('stroke-width',1.5)
+      .on('mouseenter', ev => showTip(`<b>${s.name}</b><br>${k==='first'?'İlk dönem ('+DLAB(s.first.d)+')':'Son dönem ('+DLAB(s.last.d)+')'}: ${fpct1(s[k].pct)}<br><span class="m">${f1(s[k].avg)}/${s.max} ortalama doğru</span>`, ev)).on('mousemove', moveTip).on('mouseleave', hideTip);
+  }));
+  document.getElementById('radar-legend').innerHTML = `<span style="color:var(--ink)">- - ilk dönem</span> &nbsp; <span style="color:var(--graphite);font-weight:600">━ son dönem</span>`;
+}
+
+// ---------- STATS + FINDINGS ----------
+function fillStats(){
+  const mat = S.find(s => s.name==='Matematik'), tr = S.find(s => s.name==='Türkçe');
+  const c0 = d3.mean(coreEx.filter(e=>e.d===0), e=>e.core), c1 = d3.mean(coreEx.filter(e=>e.d>=3), e=>e.core);
+  const perfect = d3.sum(S, s => s.tests.filter(t => t.c === s.max).length);
+  const deltas = S.map(s => ({s, d: s.last.pct - s.first.pct})).sort((a,b) => b.d - a.d);
+  const html = [
+    ['Tür + Mat + Fen', `${f1(c0)} <small>→ ${f1(c1)}</small>`, `<span class="up">+${f1(c1 - c0)} soru</span> · D1 ortalamasından D4-D6 ortalamasına (/100)`],
+    ['En iyi tam deneme', `${bestFull.total} <small>/120</small>`, `${bestFull.no}. deneme (${DLAB(bestFull.d)}); ${f0(fullEx.length)} denemede 9 dersin hepsi var`],
+    ['Türkçe ortalaması', `${f1(d3.mean(tr.tests, t=>t.c))} <small>/40</small>`, `${fpct1(tr.first.pct)} → ${fpct1(tr.last.pct)}; her dönem biraz daha iyi`],
+    ['Matematik ortalaması', `${f1(d3.mean(mat.tests, t=>t.c))} <small>/40</small>`, `en iyi dönem ${DLAB(d3.greatest(mat.periods.filter(Boolean), p=>p.pct).d)}: ${fpct1(d3.max(mat.periods.filter(Boolean), p=>p.pct))}`],
+    ['En büyük sıçrama', `${deltas[0].s.name}`, `<span class="up">+${f0(deltas[0].d*100)} puan</span> (${fpct(deltas[0].s.first.pct)} → ${fpct(deltas[0].s.last.pct)})`],
+    ['Geriye giden', `${deltas[deltas.length-1].s.name}`, `<span class="down">${f0(deltas[deltas.length-1].d*100)} puan</span>; D${deltas[deltas.length-1].s.last.d+1} sonrası takip yok`]
+  ];
+  document.getElementById('stats').innerHTML = html.map(([k,v,d]) => `<div class="stat"><div class="k">${k}</div><div class="v num">${v}</div><div class="d">${d}</div></div>`).join('');
+  const tMiss = tr.totalMiss, para = (tr.miss.get('Paragrafta Anlam')||0) + (tr.miss.get('Paragrafta Yapı')||0);
+  const fiz = S.find(s=>s.name==='Fizik'), optik = (fiz.miss.get('Işığın Kırılması ve Renk')||0) + (fiz.miss.get('Dalgalar')||0);
+  const prob = mat.miss.get('Problemler')||0;
+  const ola = mat.tests.filter(t => t.m['Olasılık']); const olaD1 = d3.sum(ola.filter(t=>t.d===0), t=>t.m['Olasılık']), olaAll = mat.miss.get('Olasılık');
+  const F = [
+    ['--s-fiz', f0(fen.length ? (fenLast-fenFirst)*100 : 0) + ' puan', 'Fen patladı', `Fizik, kimya ve biyolojide ilk dönemin ${fpct(fenFirst)} başarısı ${fpct(fenLast)}'e çıktı. Yılın en büyük kazancı burada.`],
+    ['--s-tr', '%' + f0(para/tMiss*100), 'Paragraf, Türkçenin kara deliği', `Türkçede kaçan ${tMiss} sorunun ${para} tanesi paragrafta anlam ve yapıdan. Dil bilgisi neredeyse temiz.`],
+    ['--s-mat', '%' + f0(prob/mat.totalMiss*100), 'Problemler inatçı', `Matematikte kaçan her 4 sorudan biri problem. Olasılık ise çözülmüş: ${olaAll} yanlışın ${olaD1}'u ilk dönemdeydi.`],
+    ['--s-fiz', '%' + f0(optik/fiz.totalMiss*100), 'Fizikte optik ve dalgalar', `Fizikteki kaçırılanların neredeyse yarısı ışığın kırılması ve dalgalar üniteleri. İlk dönemden beri azalıyor ama hâlâ ilk sırada.`]
+  ];
+  document.getElementById('findings').innerHTML = F.map(([c,big,t,p]) => `<div class="finding" style="--c:var(${c})"><div class="big num">${big}</div><div class="t">${t}</div><p>${p}</p></div>`).join('');
+}
+
+// ---------- PER-EXAM TOTALS ----------
+function examTip(e){
+  const rows = ORDER.filter(n => e.subs[n]).map(n => `${META[n].short} ${e.subs[n].c}/${S.find(s=>s.name===n).max}`).join(' · ');
+  return `<b>${e.no}. deneme</b> · ${DLAB(e.d)}${e.core!=null?`<br>Tür+Mat+Fen: <b>${e.core}</b>/100`:''}${e.total!=null?`<br>Toplam: <b>${e.total}</b>/120`:''}<br><span class="m">${rows}</span>`;
+}
+function drawStack(){
+  const el = document.getElementById('stack'); el.innerHTML = '';
+  const W = el.clientWidth, H = 330, m = {t:18, r:12, b:28, l:34};
+  const x = d3.scaleLinear([0, ND], [m.l, W-m.r]);
+  const lo = Math.floor((d3.min(coreEx, e => e.core) - 2) / 10) * 10;
+  const y = d3.scaleLinear([lo, 120], [H-m.b, m.t]);
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H);
+  d3.range(lo, 121, 10).forEach(v => { svg.append('line').attr('class','gridline').attr('x1', m.l).attr('x2', W-m.r).attr('y1', y(v)).attr('y2', y(v)).attr('stroke-dasharray', v===100||v===120 ? null : '1 3'); svg.append('text').attr('class','axis-l').attr('x', m.l-6).attr('y', y(v)+3.5).attr('text-anchor','end').style('fill', v===100||v===120 ? 'var(--graphite)' : null).text(v); });
+  d3.range(1, ND).forEach(d => svg.append('line').attr('x1', x(d)).attr('x2', x(d)).attr('y1', m.t).attr('y2', H-m.b).attr('stroke','var(--ink-soft)').attr('stroke-dasharray','2 3'));
+  d3.range(ND).forEach(d => svg.append('text').attr('class','axis-l').attr('x', x(d+.5)).attr('y', H-10).attr('text-anchor','middle').text(DLAB(d)));
+  // full 120 rings
+  svg.append('g').selectAll('circle').data(fullEx).join('circle').attr('cx', e => x(e.t)).attr('cy', e => y(e.total)).attr('r', 3.6)
+    .attr('fill','none').attr('stroke','var(--ink)').attr('stroke-width',1.4)
+    .on('mouseenter', (ev,e) => showTip(examTip(e), ev)).on('mousemove', moveTip).on('mouseleave', hideTip);
+  svg.append('path').attr('d', d3.line().x(e => x(e.t)).y(e => y(e.coreRoll)).curve(d3.curveBasis)(coreEx)).attr('fill','none').attr('stroke','var(--graphite)').attr('stroke-width',2.6).style('pointer-events','none');
+  svg.append('g').selectAll('circle').data(coreEx).join('circle').attr('cx', e => x(e.t)).attr('cy', e => y(e.core)).attr('r', 3)
+    .attr('fill','var(--graphite)').attr('fill-opacity',.35)
+    .on('mouseenter', (ev,e) => showTip(examTip(e), ev)).on('mousemove', moveTip).on('mouseleave', hideTip);
+  const b = bestFull;
+  svg.append('text').attr('x', x(b.t) + 7).attr('y', y(b.total) - 6).attr('class','disp').style('font-size','15px').style('fill','var(--ink)').text(`${b.total}/120`);
+  document.getElementById('exam-legend').innerHTML = `<span style="color:var(--graphite)">● Tür+Mat+Fen /100</span> &nbsp; <span style="color:var(--ink)">○ 9 ders /120</span>`;
+}
+
+// ---------- AREA LINES ----------
+function drawAreas(){
+  const el = document.getElementById('areas'); el.innerHTML = '';
+  const W = el.clientWidth, H = 330, m = {t:20, r:86, b:28, l:38};
+  const x = d3.scaleLinear([0, ND-1], [m.l, W-m.r]);
+  const y = d3.scaleLinear([.5, 1], [H-m.b, m.t]);
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H);
+  [.5,.6,.7,.8,.9,1].forEach(v => { svg.append('line').attr('class','gridline').attr('x1', m.l).attr('x2', W-m.r).attr('y1', y(v)).attr('y2', y(v)); svg.append('text').attr('class','axis-l').attr('x', m.l-6).attr('y', y(v)+3.5).attr('text-anchor','end').text(fpct(v)); });
+  d3.range(ND).forEach(d => svg.append('text').attr('class','axis-l').attr('x', x(d)).attr('y', H-10).attr('text-anchor','middle').text(DLAB(d)));
+  const gc = {'Türkçe':'var(--s-tr)','Matematik':'var(--s-mat)','Fen':'var(--s-fiz)','Sosyal':'var(--s-tar)'};
+  const labels = [];
+  groupSeries.forEach(g => {
+    svg.append('path').attr('d', d3.line().x(p => x(p.d)).y(p => y(p.v)).curve(d3.curveMonotoneX)(g.pts)).attr('fill','none').attr('stroke', gc[g.g]).attr('stroke-width', g.g==='Fen'?3:2);
+    g.pts.forEach(p => svg.append('circle').attr('cx', x(p.d)).attr('cy', y(p.v)).attr('r', 3.5).attr('fill','var(--card)').attr('stroke', gc[g.g]).attr('stroke-width',2)
+      .on('mouseenter', ev => showTip(`<b>${g.g}</b> · ${DLAB(p.d)}<br>${fpct1(p.v)} başarı`, ev)).on('mousemove', moveTip).on('mouseleave', hideTip));
+    const lp = g.pts[g.pts.length-1];
+    labels.push({g:g.g, x:x(lp.d), y:y(lp.v), v:lp.v, c:gc[g.g]});
+  });
+  // collision-avoid labels
+  labels.sort((a,b) => a.y - b.y); for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i-1].y < 15) labels[i].y = labels[i-1].y + 15;
+  labels.forEach(l => svg.append('text').attr('x', l.x + 9).attr('y', l.y + 4).attr('class','lbl-strong').style('fill', l.c).text(`${l.g} ${fpct(l.v)}`));
+}
+
+// ---------- SMALL MULTIPLES ----------
+function drawMultiples(){
+  const el = document.getElementById('multiples'); el.innerHTML = '';
+  S.forEach(s => {
+    const card = document.createElement('div'); card.className = 'mcard'; card.style.setProperty('--c', col(s.name));
+    const d = s.last.pct - s.first.pct;
+    card.innerHTML = `<div class="top"><div class="name"><i></i>${s.name}</div><span class="chip ${d>0.005?'up':d<-0.005?'down':''}">${d>=0?'+':''}${f0(d*100)} puan</span></div><div class="sub num">${s.tests.length} deneme · ort. ${f1(d3.mean(s.tests,t=>t.c))}/${s.max} · ${fpct(s.first.pct)} → ${fpct(s.last.pct)}</div><div class="plot"></div>`;
+    el.appendChild(card);
+    const pl = card.querySelector('.plot');
+    const W = pl.clientWidth, H = 150, m = {t:10, r:6, b:18, l:24};
+    const x = d3.scaleLinear([0, ND], [m.l, W-m.r]);
+    const lo = d3.min(s.tests, t => t.c);
+    const y = d3.scaleLinear([Math.max(0, lo - (s.max>10?1:.5)), s.max + (s.max>10?.6:.35)], [H-m.b, m.t]);
+    const svg = d3.select(pl).append('svg').attr('width', W).attr('height', H);
+    d3.range(1, ND).forEach(d => svg.append('line').attr('x1', x(d)).attr('x2', x(d)).attr('y1', m.t).attr('y2', H-m.b).attr('stroke','var(--rule)').attr('stroke-dasharray','2 3'));
+    d3.range(ND).forEach(d => svg.append('text').attr('class','axis-l').attr('x', x(d+.5)).attr('y', H-4).attr('text-anchor','middle').style('font-size','9.5px').text(DLAB(d)));
+    const ticks = s.max > 10 ? y.ticks(4).filter(Number.isInteger) : d3.range(Math.ceil(y.domain()[0]), s.max+1);
+    ticks.forEach(v => { svg.append('text').attr('class','axis-l').attr('x', m.l-5).attr('y', y(v)+3).attr('text-anchor','end').style('font-size','9.5px').text(v); });
+    svg.append('line').attr('x1', m.l).attr('x2', W-m.r).attr('y1', y(s.max)).attr('y2', y(s.max)).attr('stroke', col(s.name)).attr('stroke-opacity',.35).attr('stroke-dasharray','1 3');
+    const jit = (t) => s.max > 10 ? 0 : ((t.i * 37 % 11) / 11 - .5) * .42;
+    svg.append('g').selectAll('circle').data(s.tests).join('circle')
+      .attr('cx', t => x(t.t)).attr('cy', t => y(t.c + jit(t))).attr('r', 2.4)
+      .attr('fill', t => t.pct < .7 ? 'var(--ink)' : col(s.name)).attr('fill-opacity', .45)
+      .on('mouseenter', (ev,t) => showTip(testTip(t), ev)).on('mousemove', moveTip).on('mouseleave', hideTip);
+    const area = d3.area().x(p => x(p.t)).y0(H-m.b).y1(p => y(p.v)).curve(d3.curveBasis);
+    svg.insert('path', 'g').attr('d', area(s.roll)).attr('fill', col(s.name)).attr('fill-opacity', .08);
+    svg.append('path').attr('d', d3.line().x(p => x(p.t)).y(p => y(p.v)).curve(d3.curveBasis)(s.roll)).attr('fill','none').attr('stroke', col(s.name)).attr('stroke-width', 2.4).style('pointer-events','none');
+    const lp = s.roll[s.roll.length-1];
+    svg.append('circle').attr('cx', x(lp.t)).attr('cy', y(lp.v)).attr('r', 4).attr('fill', col(s.name)).attr('stroke','var(--card)').attr('stroke-width',2);
+  });
+}
+
+// ---------- HEATMAP ----------
+let curSub = 'Türkçe';
+try { const v = localStorage.getItem('tyt-heat'); if (v && META[v]) curSub = v; } catch(e){}
+function buildTabs(){
+  const el = document.getElementById('tabs');
+  el.innerHTML = S.map(s => `<button class="tab" role="tab" id="tab-${META[s.name].k}" aria-selected="${s.name===curSub}" style="--c:${col(s.name)}"><i></i>${s.name}</button>`).join('');
+  el.querySelectorAll('.tab').forEach((b,i) => b.addEventListener('click', () => { curSub = S[i].name; try { localStorage.setItem('tyt-heat', curSub); } catch(e){} el.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x === b)); drawHeat(); }));
+}
+function drawHeat(){
+  const el = document.getElementById('heat'); el.innerHTML = '';
+  const s = S.find(x => x.name === curSub);
+  const geo = new Set(s.topics.filter(t => t.g).map(t => t.n));
+  const topics = [...s.miss.entries()].filter(([k]) => k !== 'Diğer').sort((a,b) => b[1]-a[1]).slice(0, 16).map(d => d[0]);
+  const ds = d3.range(ND).filter(d => s.periods[d]);
+  const cells = [];
+  topics.forEach(tp => ds.forEach(d => { const arr = s.tests.filter(t => t.d === d); const n = d3.sum(arr, t => t.m[tp]||0); cells.push({tp, d, n, rate: n / arr.length * 10, tests: arr.length}); }));
+  const maxRate = d3.max(cells, c => c.rate) || 1;
+  const labelW = Math.min(230, Math.max(150, el.clientWidth * .28)), cellW = Math.max(46, Math.min(84, (el.clientWidth - labelW - 150) / ds.length)), cellH = 30, barW = 110;
+  const W = labelW + cellW * ds.length + 20 + barW + 46, H = 28 + cellH * topics.length + 4;
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H);
+  const color = d3.scaleSequential(t => d3.interpolateRgb(css('--ink-wash'), css('--ink'))(Math.pow(t, .75))).domain([0, maxRate]);
+  ds.forEach((d,j) => svg.append('text').attr('class','axis-l').attr('x', labelW + j*cellW + cellW/2).attr('y', 14).attr('text-anchor','middle').style('fill','var(--graphite)').style('font-weight',600).text(DLAB(d)));
+  svg.append('text').attr('class','axis-l').attr('x', labelW + ds.length*cellW + 20).attr('y', 14).text('toplam');
+  const xb = d3.scaleLinear([0, d3.max(topics, t => s.miss.get(t))], [0, barW]);
+  topics.forEach((tp,i) => {
+    const yy = 24 + i*cellH;
+    svg.append('text').attr('x', labelW - 10).attr('y', yy + cellH/2 + 4).attr('text-anchor','end').attr('class','lbl-strong').style('font-weight',500).text(tp.length > 32 ? tp.slice(0,31)+'…' : tp);
+    if (geo.has(tp)) svg.append('text').attr('x', 2).attr('y', yy + cellH/2 + 4).attr('class','axis-l').style('font-size','9px').style('fill','var(--s-mat)').text('GEO');
+    const tot = s.miss.get(tp);
+    svg.append('rect').attr('x', labelW + ds.length*cellW + 20).attr('y', yy + 8).attr('height', cellH - 16).attr('width', xb(tot)).attr('fill', col(s.name)).attr('rx', 1);
+    svg.append('text').attr('class','axis-l').attr('x', labelW + ds.length*cellW + 26 + xb(tot)).attr('y', yy + cellH/2 + 4).style('fill','var(--graphite)').text(tot);
+  });
+  svg.append('g').selectAll('g').data(cells).join('g').each(function(c){
+    const g = d3.select(this), i = topics.indexOf(c.tp), j = ds.indexOf(c.d);
+    const xx = labelW + j*cellW, yy = 24 + i*cellH;
+    g.append('rect').attr('x', xx + 1.5).attr('y', yy + 1.5).attr('width', cellW - 3).attr('height', cellH - 3).attr('rx', 3)
+      .attr('fill', c.n ? color(c.rate) : 'none').attr('stroke', c.n ? 'none' : 'var(--rule)');
+    if (c.n) g.append('text').attr('x', xx + cellW/2).attr('y', yy + cellH/2 + 4).attr('text-anchor','middle').attr('class','num')
+      .style('font-family','var(--f-mono)').style('font-size','11px').style('fill', c.rate > maxRate*.5 ? '#fff' : 'var(--graphite)').text(f1(c.rate));
+    g.append('rect').attr('x', xx).attr('y', yy).attr('width', cellW).attr('height', cellH).attr('fill','transparent')
+      .on('mouseenter', ev => showTip(`<b>${c.tp}</b> · ${DLAB(c.d)}<br>${c.n} soru kaçtı / ${c.tests} deneme<br><span class="m">10 denemede ${f1(c.rate)}</span>`, ev)).on('mousemove', moveTip).on('mouseleave', hideTip);
+  });
+}
+
+// ---------- TOP BARS ----------
+function drawTop(){
+  const el = document.getElementById('topbars'); el.innerHTML = '';
+  const all = []; S.forEach(s => s.miss.forEach((v,k) => { if (k !== 'Diğer') all.push({s:s.name, k, v, per10: v / s.tests.length * 10}); }));
+  const top = all.sort((a,b) => b.v - a.v).slice(0, 16);
+  const W = el.clientWidth, rowH = 27, H = rowH * top.length + 8, lw = Math.min(210, W*.44);
+  const x = d3.scaleLinear([0, top[0].v], [0, W - lw - 44]);
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H);
+  top.forEach((t,i) => {
+    const yy = i*rowH + 4;
+    svg.append('text').attr('x', lw - 10).attr('y', yy + 11).attr('text-anchor','end').attr('class','lbl-strong').style('font-weight',500).text(t.k.length > 28 ? t.k.slice(0,27)+'…' : t.k);
+    svg.append('text').attr('x', lw - 10).attr('y', yy + 22).attr('text-anchor','end').attr('class','axis-l').style('font-size','9.5px').style('fill', col(t.s)).text(t.s.toUpperCase());
+    svg.append('rect').attr('x', lw).attr('y', yy + 3).attr('height', rowH - 10).attr('width', x(t.v)).attr('fill', col(t.s)).attr('rx', 1.5)
+      .on('mouseenter', ev => showTip(`<b>${t.k}</b> · ${t.s}<br>${t.v} soru kaçtı<br><span class="m">10 denemede ${f1(t.per10)}</span>`, ev)).on('mousemove', moveTip).on('mouseleave', hideTip);
+    svg.append('text').attr('x', lw + x(t.v) + 6).attr('y', yy + 16).attr('class','disp').style('font-size','15px').text(t.v);
+  });
+}
+
+// ---------- WAFFLE ----------
+function drawWaffle(){
+  const el = document.getElementById('waffle'); el.innerHTML = '';
+  document.getElementById('waffle-title').textContent = `${f0(totalMiss)} kaçırılan soru`;
+  const W = el.clientWidth, step = W < 420 ? 7 : 8.4, cols = Math.floor((W - 4) / step);
+  const items = []; S.slice().sort((a,b) => b.totalMiss - a.totalMiss).forEach(s => { [...s.miss.entries()].sort((a,b)=>b[1]-a[1]).forEach(([k,v]) => { for (let i = 0; i < v; i++) items.push({s:s.name, k}); }); });
+  const rows = Math.ceil(items.length / cols), H = rows * step + 4;
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H);
+  svg.append('g').selectAll('circle').data(items).join('circle')
+    .attr('cx', (d,i) => (i % cols) * step + step/2 + 2).attr('cy', (d,i) => Math.floor(i / cols) * step + step/2 + 2).attr('r', step*.38)
+    .attr('fill', d => col(d.s))
+    .on('mouseenter', (ev,d) => showTip(`<b>${d.k}</b><br>${d.s} · ${S.find(s=>s.name===d.s).miss.get(d.k)} soru`, ev)).on('mousemove', moveTip).on('mouseleave', hideTip);
+  const lg = d3.select(el).append('div').attr('class','legend');
+  S.slice().sort((a,b) => b.totalMiss - a.totalMiss).forEach(s => lg.append('span').attr('class','sw num').html(`<span class="bub" style="border:0;background:${col(s.name)}"></span>${s.name} ${s.totalMiss}`));
+}
+
+// ---------- PUBLISHERS ----------
+function drawPubs(){
+  const el = document.getElementById('pubs'); el.innerHTML = '';
+  const all = S.flatMap(s => s.tests.filter(t => t.p));
+  const refMean = d3.mean(all, t => t.pct);
+  const byP = d3.rollups(all, v => ({n:v.length, m:d3.mean(v, t => t.pct), v}), t => t.p).filter(d => d[1].n >= 8).sort((a,b) => a[1].m - b[1].m);
+  const W = el.clientWidth, rowH = 30, m = {t:26, r:92, b:24, l:90}, H = m.t + rowH*byP.length + m.b;
+  const x = d3.scaleLinear([.4, 1], [m.l, W - m.r]);
+  const svg = d3.select(el).append('svg').attr('width', W).attr('height', H);
+  [.4,.5,.6,.7,.8,.9,1].forEach(v => { svg.append('line').attr('class','gridline').attr('x1', x(v)).attr('x2', x(v)).attr('y1', m.t-6).attr('y2', H-m.b); svg.append('text').attr('class','axis-l').attr('x', x(v)).attr('y', 12).attr('text-anchor','middle').text(fpct(v)); });
+  svg.append('line').attr('x1', x(refMean)).attr('x2', x(refMean)).attr('y1', m.t-8).attr('y2', H-m.b).attr('stroke','var(--ink)').attr('stroke-dasharray','3 3');
+  svg.append('text').attr('x', x(refMean)+4).attr('y', H-6).attr('class','axis-l').style('fill','var(--ink)').text('ortalama ' + fpct(refMean));
+  byP.forEach(([p, o], i) => {
+    const yy = m.t + i*rowH + rowH/2;
+    svg.append('text').attr('x', m.l - 12).attr('y', yy + 4).attr('text-anchor','end').attr('class','lbl-strong').text(p);
+    o.v.forEach((t,j) => svg.append('circle').attr('cx', x(Math.max(.4, t.pct))).attr('cy', yy + ((j*7)%9 - 4)*1.1).attr('r', 3).attr('fill', col(t.s)).attr('fill-opacity', .5)
+      .on('mouseenter', ev => showTip(testTip(t), ev)).on('mousemove', moveTip).on('mouseleave', hideTip));
+    svg.append('line').attr('x1', x(o.m)).attr('x2', x(o.m)).attr('y1', yy - 10).attr('y2', yy + 10).attr('stroke','var(--graphite)').attr('stroke-width', 3);
+    svg.append('text').attr('x', W - m.r + 20).attr('y', yy + 4).attr('class','num').style('font-family','var(--f-mono)').style('font-size','11.5px').style('fill','var(--graphite)').text(`${fpct(o.m)} · ${o.n}`);
+  });
+}
+
+function drawAll(){ drawHero(); drawRadar(); drawStack(); drawAreas(); drawMultiples(); drawHeat(); drawTop(); drawWaffle(); drawPubs(); }
+fillStats(); buildTabs(); drawAll();
+let rt, lastW = innerWidth; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (Math.abs(innerWidth - lastW) > 4) { lastW = innerWidth; drawAll(); } }, 150); });
+new MutationObserver(() => drawAll()).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+})();
+</script>

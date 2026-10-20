@@ -1,0 +1,563 @@
+<title>Deneme Defteri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Kalam:wght@400;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{
+  --paper:#FBFAF3; --paper-edge:#F1EEDF; --grid:#DCE5EE; --margin:#E8A0A0;
+  --ink:#1F3A9E; --pencil:#3A3A40; --muted:#6B6A73; --faint:#A9A8AE;
+  --red:#D23338; --hl-y:rgba(255,222,55,.62); --hl-p:rgba(255,125,175,.42); --hl-g:rgba(125,215,110,.45); --hl-b:rgba(110,185,255,.40);
+  --note-y:#FFF1A6; --note-p:#FFD3E2; --note-g:#D4F2C4; --note-b:#D2E7FB; --note-text:#2D2B26;
+  --p-tr:#DB6419; --p-mat:#1F3A9E; --p-fiz:#0C8C7B; --p-kim:#8A3DBE; --p-bio:#3A9637;
+  --p-tar:#A2702C; --p-cog:#6C8A2A; --p-fel:#A06B9A; --p-din:#5E7386;
+  --f-hand:"Caveat","Segoe Print","Bradley Hand",cursive;
+  --f-note:"Kalam","Segoe Print","Bradley Hand",cursive;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --board-tex:none;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --paper:#1E2A25; --paper-edge:#18221E; --grid:#27362F; --margin:#7A4A48;
+    --ink:#EDEBE0; --pencil:#E4E2D8; --muted:#A9B3AC; --faint:#6E7C74;
+    --red:#F4847C; --hl-y:rgba(244,221,112,.30); --hl-p:rgba(242,150,190,.28); --hl-g:rgba(150,220,140,.26); --hl-b:rgba(140,195,245,.26);
+    --note-y:#EFDC86; --note-p:#EFB5CB; --note-g:#BFE3AC; --note-b:#B8D6F2; --note-text:#26241F;
+    --p-tr:#F5A064; --p-mat:#9DC0F5; --p-fiz:#6ED8C6; --p-kim:#D1A4F2; --p-bio:#9DDB8E;
+    --p-tar:#E2B77A; --p-cog:#C4D983; --p-fel:#E5B4DF; --p-din:#AFC2D2;
+    --board-tex:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,.035),transparent 55%),radial-gradient(ellipse at 80% 60%,rgba(255,255,255,.025),transparent 50%);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --paper:#1E2A25; --paper-edge:#18221E; --grid:#27362F; --margin:#7A4A48;
+  --ink:#EDEBE0; --pencil:#E4E2D8; --muted:#A9B3AC; --faint:#6E7C74;
+  --red:#F4847C; --hl-y:rgba(244,221,112,.30); --hl-p:rgba(242,150,190,.28); --hl-g:rgba(150,220,140,.26); --hl-b:rgba(140,195,245,.26);
+  --note-y:#EFDC86; --note-p:#EFB5CB; --note-g:#BFE3AC; --note-b:#B8D6F2; --note-text:#26241F;
+  --p-tr:#F5A064; --p-mat:#9DC0F5; --p-fiz:#6ED8C6; --p-kim:#D1A4F2; --p-bio:#9DDB8E;
+  --p-tar:#E2B77A; --p-cog:#C4D983; --p-fel:#E5B4DF; --p-din:#AFC2D2;
+  --board-tex:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,.035),transparent 55%),radial-gradient(ellipse at 80% 60%,rgba(255,255,255,.025),transparent 50%);
+}
+*{box-sizing:border-box}
+body{
+  background-color:var(--paper);
+  background-image:var(--board-tex),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:auto,24px 24px,24px 24px;
+  color:var(--pencil);font-family:var(--f-body);font-size:16px;line-height:1.6;
+}
+.page{position:relative;max-width:1120px;margin:0 auto;padding-inline:20px 20px;padding-block:28px 72px}
+.page::before{content:"";position:absolute;top:0;bottom:0;left:max(8px,calc(50% - 560px + 58px));width:2px;background:var(--margin);opacity:.85;pointer-events:none}
+@media (min-width:760px){.page{padding-inline:96px 36px}}
+.num{font-variant-numeric:tabular-nums}
+
+/* header line */
+.topline{display:flex;flex-wrap:wrap;gap:6px 28px;font-family:var(--f-note);font-size:17px;color:var(--muted)}
+.topline b{font-weight:700;color:var(--ink)}
+h1{font-family:var(--f-hand);font-weight:700;font-size:clamp(64px,12vw,138px);line-height:.9;margin:14px 0 0;color:var(--ink);letter-spacing:-.01em;transform:rotate(-1.2deg);transform-origin:left}
+.hl{background:linear-gradient(100deg,transparent 2%,var(--hl-y) 4%,var(--hl-y) 94%,transparent 97%);background-size:100% 58%;background-position:0 78%;background-repeat:no-repeat;padding:0 .08em;border-radius:3px}
+.hl-p{background-image:linear-gradient(100deg,transparent 2%,var(--hl-p) 4%,var(--hl-p) 94%,transparent 97%)}
+.hl-g{background-image:linear-gradient(100deg,transparent 2%,var(--hl-g) 4%,var(--hl-g) 94%,transparent 97%)}
+.hl-b{background-image:linear-gradient(100deg,transparent 2%,var(--hl-b) 4%,var(--hl-b) 94%,transparent 97%)}
+.lede{max-width:64ch;font-size:18px;margin:22px 0 0}
+.lede b{color:var(--ink)}
+
+section{margin-top:76px}
+h2{font-family:var(--f-hand);font-weight:700;font-size:clamp(40px,5.6vw,58px);line-height:1;margin:0;color:var(--ink);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+h2 .no{font-size:.7em;color:var(--red);border:2.5px solid var(--red);border-radius:50%;width:1.35em;height:1.35em;display:inline-grid;place-items:center;line-height:1;transform:rotate(-6deg);flex:none}
+.sub{font-family:var(--f-note);font-size:17px;color:var(--muted);margin:8px 0 22px;max-width:70ch}
+h3{font-family:var(--f-hand);font-weight:700;font-size:30px;line-height:1.05;margin:0;color:var(--ink)}
+
+/* karne */
+.karne{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.kcard{position:relative;padding:14px 16px 12px;min-height:220px}
+.kcard .frame{position:absolute;inset:0;pointer-events:none}
+.kcard .frame svg{width:100%;height:100%;overflow:visible}
+.kcard .name{font-family:var(--f-hand);font-weight:700;font-size:32px;line-height:1;color:var(--c)}
+.kcard .big{position:relative;display:inline-block;font-family:var(--f-hand);font-weight:700;font-size:74px;line-height:1;color:var(--pencil);margin-top:6px;padding:0 10px}
+.kcard .big small{font-size:30px;color:var(--muted);font-weight:500}
+.kcard .big svg{position:absolute;inset:-10px -18px -6px -14px;width:calc(100% + 32px);height:calc(100% + 16px);overflow:visible;pointer-events:none}
+.kcard .meta{font-size:14px;color:var(--muted)}
+.kcard .remark{font-family:var(--f-note);color:var(--red);font-size:18px;line-height:1.25;margin-top:4px;transform:rotate(-1.5deg)}
+.kcard .spark{height:46px;margin-top:6px}
+.kcard.total{--c:var(--red)}
+.kcard.total .big{font-size:80px}
+
+.notes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:34px}
+.note{background:var(--bg);color:var(--note-text);padding:16px 16px 18px;box-shadow:0 1px 0 rgba(0,0,0,.05),0 10px 18px -12px rgba(0,0,0,.35);transform:rotate(var(--r));position:relative;font-family:var(--f-note);font-size:16px;line-height:1.35}
+.note::before{content:"";position:absolute;top:-10px;left:50%;width:72px;height:22px;transform:translateX(-50%) rotate(-3deg);background:rgba(255,255,255,.55);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.note .t{font-family:var(--f-hand);font-weight:700;font-size:28px;line-height:1;margin-bottom:6px}
+.note .n{font-family:var(--f-hand);font-weight:700;font-size:44px;line-height:.9}
+
+/* radar */
+.radar-row{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:30px;align-items:center;margin-top:40px}
+.radar-side .legend{margin:0 0 14px}
+.legend i.dash{background:repeating-linear-gradient(90deg,var(--c) 0 5px,transparent 5px 9px)}
+.rt-row{display:grid;grid-template-columns:110px 1fr auto;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1.5px dashed var(--grid)}
+.rt-row .n{font-family:var(--f-hand);font-weight:700;font-size:26px;color:var(--c);line-height:1}
+.rt-row .v{font-family:var(--f-note);font-size:17px;color:var(--muted)}
+.rt-row .v b{color:var(--pencil)}
+.rt-row .d{font-family:var(--f-hand);font-weight:700;font-size:26px;line-height:1}
+.rt-note{font-family:var(--f-note);font-size:15px;color:var(--muted);margin-top:10px}
+@media (max-width:900px){.radar-row{grid-template-columns:minmax(0,1fr)}}
+
+/* charts */
+.chart{position:relative}
+.chart svg{display:block;overflow:visible}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:30px}
+.multi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 30px}
+.mhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.mhead .trend{font-family:var(--f-note);font-size:16px;color:var(--muted)}
+.mhead .trend b{color:var(--c)}
+.axis{font-family:var(--f-note);font-size:13px;fill:var(--muted)}
+.plabel{font-family:var(--f-hand);font-weight:700;font-size:19px}
+.hand{font-family:var(--f-note);font-size:15px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--f-note);font-size:16px;margin-top:10px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:22px;height:4px;border-radius:2px;background:var(--c);transform:rotate(-4deg)}
+
+/* tally */
+.tally-row{display:grid;grid-template-columns:minmax(150px,240px) auto 1fr;gap:14px;align-items:center;padding:3px 0}
+.tally-row .lab{font-size:15px;line-height:1.25;justify-self:end;text-align:right}
+.tally-row .lab span{padding:0 4px;border-radius:2px;background-image:linear-gradient(100deg,transparent 1%,var(--hl) 3%,var(--hl) 96%,transparent 99%)}
+.tally-row .lab small{display:block;font-family:var(--f-note);color:var(--c);font-size:13px}
+.tally-row .cnt{font-family:var(--f-hand);font-weight:700;font-size:26px;color:var(--pencil);min-width:2ch}
+.tally-row svg{display:block;overflow:visible}
+
+/* X map */
+.xmap-wrap{overflow-x:auto;padding-bottom:6px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
+.tab{font:700 22px/1 var(--f-hand);background:transparent;border:0;color:var(--muted);padding:6px 10px;cursor:pointer;position:relative}
+.tab[aria-pressed="true"]{color:var(--c)}
+.tab[aria-pressed="true"]::after{content:"";position:absolute;left:4px;right:4px;bottom:1px;height:9px;background:var(--hl-y);z-index:-1;border-radius:3px;transform:rotate(-1.5deg)}
+.tab:focus-visible{outline:2px dashed var(--red);outline-offset:3px}
+
+.tip{position:fixed;z-index:30;pointer-events:none;background:var(--note-y);color:var(--note-text);font-family:var(--f-note);font-size:15px;line-height:1.3;padding:9px 12px 10px;max-width:260px;box-shadow:0 10px 18px -10px rgba(0,0,0,.45);transform:rotate(-1deg);opacity:0;transition:opacity .12s}
+.tip b{font-family:var(--f-hand);font-size:22px;font-weight:700;display:block;line-height:1}
+
+.foot{margin-top:80px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;font-size:14px;color:var(--muted)}
+.foot b{display:block;font-family:var(--f-hand);font-size:24px;color:var(--ink);margin-bottom:2px}
+
+@media (max-width:900px){
+  .karne{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .notes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .row2,.multi,.foot{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .karne,.notes{grid-template-columns:minmax(0,1fr)}
+  .tally-row{grid-template-columns:auto 1fr;}
+  .tally-row .lab{justify-self:start;text-align:left;grid-column:1 / -1}
+  .kcard .big{font-size:62px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<main class="page">
+  <div class="topline"><span>Konu: <b>TYT deneme takibi</b></span><span>Kaynak: <b>TAKİP TASLAK · TYT AYRINTI</b></span><span id="topcount"></span></div>
+  <h1>Deneme <span class="hl">Defteri</span></h1>
+  <p class="lede" id="lede"></p>
+
+  <section id="genel-bakis">
+    <h2><span class="no">1</span>Genel bakış</h2>
+    <p class="sub">Her dersin deneme ortalaması, kırmızı kalemle kısa bir öğretmen notu ve küçük bir gidiş çizgisi. Altında denemelerin ilk yarısı ile son yarısını karşılaştıran ders profili.</p>
+    <div class="karne" id="karne"></div>
+    <div class="radar-row">
+      <div><h3>Ders profili</h3><div class="chart" id="radar"></div></div>
+      <div class="radar-side"><div class="legend" id="radar-legend"></div><div id="radar-table"></div></div>
+    </div>
+    <div class="notes" id="notes"></div>
+  </section>
+
+  <section id="dersler">
+    <h2><span class="no">2</span>Ders ders gidişat</h2>
+    <p class="sub">Her noktanın üstündeki sayı o denemedeki doğru sayısı. Kesikli çizgi eğilim; en iyi deneme yeşil, en kötüsü kırmızı halkayla işaretli.</p>
+    <div class="multi" id="multi"></div>
+  </section>
+
+  <section id="genel-gidis">
+    <h2><span class="no">3</span>Genel gidiş</h2>
+    <p class="sub">Solda beş dersin birlikte çözüldüğü denemelerde Türkçe + matematik + fen toplamı (100 soru). Sağda her denemenin genel başarısı: o gün çözülen derslerin doğrularının soru sayısına oranı.</p>
+    <div class="row2">
+      <div><h3>Tam denemeler</h3><div class="chart" id="stack"></div><div class="legend" id="stack-legend"></div></div>
+      <div><h3>Deneme deneme başarı</h3><div class="chart" id="overall"></div><div class="legend" id="overall-legend"></div></div>
+    </div>
+  </section>
+
+  <section id="kacanlar">
+    <h2><span class="no">4</span>En çok kaçanlar</h2>
+    <p class="sub">Tabloya atılan her X burada bir çetele çizgisi. Beşer beşer sayılır; en uzun çeteleler çalışma listesinin başı.</p>
+    <div id="tally"></div>
+  </section>
+
+  <section id="x-haritasi">
+    <h2><span class="no">5</span>Hata haritası</h2>
+    <p class="sub">Tablonun kendisi, temize çekilmiş hali: satırlar konu, sütunlar deneme. Kırmızı her X bir kaçan soru; gri sütun o ders o denemede çözülmemiş demek.</p>
+    <div class="tabs" id="tabs"></div>
+    <div class="xmap-wrap"><div id="xmap"></div></div>
+  </section>
+
+  <footer class="foot">
+    <div><b>Neyi saydık?</b>Her ders bloğunun toplam satırındaki sayı doğru sayısı, konu satırlarındaki her X bir kaçan soru. Yanlış ve boş ayrılmadığı için net değil doğru gösteriliyor.</div>
+    <div><b>Deneme sırası</b>Her sütun bir deneme; soldan sağa çözüldüğü sıra kabul edildi. Tabloda tarih yok, bu yüzden eksen deneme numarası.</div>
+    <div><b>Eksikler</b>Sosyal dersler bu tabloda henüz yok. Matematik sadece ilk denemelerde, Türkçe ilk 10 denemede işlenmiş; bu güncel ve büyüyen bir tablo.</div>
+  </footer>
+</main>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script type="application/json" id="data">__DATA__</script>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.js"></script>
+<script>
+(function(){
+const RAW = JSON.parse(document.getElementById('data').textContent);
+const PREF = ['Türkçe','Matematik','Fizik','Kimya','Biyoloji','Tarih','Coğrafya','Felsefe','Din'];
+const KEY = {'Türkçe':'tr','Matematik':'mat','Fizik':'fiz','Kimya':'kim','Biyoloji':'bio','Tarih':'tar','Coğrafya':'cog','Felsefe':'fel','Din':'din'};
+const HL = {'Türkçe':'--hl-y','Matematik':'--hl-b','Fizik':'--hl-g','Kimya':'--hl-p','Biyoloji':'--hl-g','Tarih':'--hl-y','Coğrafya':'--hl-g','Felsefe':'--hl-p','Din':'--hl-b'};
+const S = PREF.map(n => RAW.find(s => s.name === n)).filter(Boolean);
+const SVGNS = 'http://www.w3.org/2000/svg';
+const tok = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const pen = n => tok('--p-' + KEY[n]);
+const penVar = n => 'var(--p-' + KEY[n] + ')';
+const nf1 = new Intl.NumberFormat('tr-TR',{minimumFractionDigits:1,maximumFractionDigits:1});
+const f1 = v => nf1.format(v), f0 = v => new Intl.NumberFormat('tr-TR').format(Math.round(v));
+const pct = v => '%' + Math.round(v*100);
+const mean = a => a.reduce((x,y) => x+y, 0) / a.length;
+const sum = a => a.reduce((x,y) => x+y, 0);
+const slope = ys => { const n = ys.length, mx = (n-1)/2, my = mean(ys); let a = 0, b = 0; ys.forEach((y,i) => { a += (i-mx)*(y-my); b += (i-mx)**2; }); return b ? a/b : 0; };
+
+// ---- model: every sheet column is one exam ----
+const cols = [...new Set(S.flatMap(s => s.tests.map(t => t.x)))].sort((a,b) => a-b);
+const EX = cols.map((x,i) => ({x, no:i+1, subs:{}}));
+const byX = new Map(EX.map(e => [e.x, e]));
+S.forEach(s => {
+  s.tests.forEach(t => { const e = byX.get(t.x); t.no = e.no; t.s = s.name; t.pct = t.c / s.max; e.subs[s.name] = t; });
+  s.avg = mean(s.tests.map(t => t.c)); s.pct = s.avg / s.max;
+  s.slope = slope(s.tests.map(t => t.c));
+  s.miss = new Map(); s.tests.forEach(t => Object.entries(t.m).forEach(([k,v]) => s.miss.set(k, (s.miss.get(k)||0) + v)));
+  s.totalMiss = sum([...s.miss.values()]);
+  s.geo = new Set(s.topics.filter(t => t.g).map(t => t.n));
+});
+const CORE = ['Türkçe','Matematik','Fizik','Kimya','Biyoloji'].filter(n => S.some(s => s.name === n));
+EX.forEach(e => {
+  const present = S.filter(s => e.subs[s.name]);
+  e.overall = sum(present.map(s => e.subs[s.name].c)) / sum(present.map(s => s.max));
+  e.nsubs = present.length;
+  e.core = CORE.every(n => e.subs[n]) ? sum(CORE.map(n => e.subs[n].c)) : null;
+});
+const coreEx = EX.filter(e => e.core != null);
+const totalMiss = sum(S.map(s => s.totalMiss));
+const G = n => S.find(s => s.name === n);
+
+// ---- tooltip ----
+const tip = document.getElementById('tip');
+const showTip = (html, ev) => { tip.innerHTML = html; tip.style.opacity = 1; moveTip(ev); };
+const moveTip = ev => { const r = tip.getBoundingClientRect(); let x = ev.clientX + 16, y = ev.clientY + 16; if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 16; if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 16; tip.style.left = x + 'px'; tip.style.top = y + 'px'; };
+const hideTip = () => tip.style.opacity = 0;
+const bindTip = (el, html) => { el.addEventListener('mouseenter', ev => showTip(typeof html === 'function' ? html() : html, ev)); el.addEventListener('mousemove', moveTip); el.addEventListener('mouseleave', hideTip); el.style.cursor = 'pointer'; };
+function examTip(e){
+  const rows = S.filter(s => e.subs[s.name]).map(s => `${s.name}: ${e.subs[s.name].c}/${s.max}`).join('<br>');
+  return `<b>${e.no}. deneme</b>${e.core!=null?`Tür+Mat+Fen: ${e.core}/100<br>`:''}${rows}${Object.values(e.subs).find(t=>t.p)?`<br><i>yayın: ${Object.values(e.subs).find(t=>t.p).p}</i>`:''}`;
+}
+
+// ---- svg helpers ----
+let seed = 1;
+function mk(parent, W, H){
+  const svg = document.createElementNS(SVGNS, 'svg');
+  svg.setAttribute('width', W); svg.setAttribute('height', H); svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  parent.appendChild(svg);
+  return {svg, rc: rough.svg(svg)};
+}
+const R = (o) => Object.assign({seed: seed++, roughness: 1.1, bowing: .8}, o);
+function text(svg, x, y, str, cls, attrs = {}){
+  const t = document.createElementNS(SVGNS, 'text'); t.setAttribute('x', x); t.setAttribute('y', y); if (cls) t.setAttribute('class', cls);
+  Object.entries(attrs).forEach(([k,v]) => t.setAttribute(k, v)); t.textContent = str; svg.appendChild(t); return t;
+}
+function hit(svg, x, y, w, h){ const r = document.createElementNS(SVGNS, 'rect'); r.setAttribute('x', x); r.setAttribute('y', y); r.setAttribute('width', w); r.setAttribute('height', h); r.setAttribute('fill', 'transparent'); svg.appendChild(r); return r; }
+const add = (svg, node) => { svg.appendChild(node); return node; };
+
+// ---- header copy ----
+document.getElementById('topcount').innerHTML = `Deneme: <b>${EX.length}</b> · Kaçan soru: <b>${f0(totalMiss)}</b>`;
+const coreAvg = sum(CORE.map(n => G(n).avg));
+const mat = G('Matematik'), tr = G('Türkçe');
+const geoMiss = mat ? sum([...mat.miss].filter(([k]) => mat.geo.has(k)).map(([,v]) => v)) : 0;
+const para = tr ? (tr.miss.get('Paragrafta Anlam')||0) : 0;
+S.forEach(s => {
+  const h = Math.floor(s.tests.length / 2);
+  s.h1 = mean(s.tests.slice(0, Math.max(1, h)).map(t => t.c)) / s.max;
+  s.h2 = mean(s.tests.slice(Math.max(1, h)).map(t => t.c)) / s.max;
+});
+const risers = S.filter(s => s.h2 - s.h1 >= .03 && s.slope > 0).map(s => s.name);
+const platoNote = risers.length ? ` Yalnızca ${risers.join(' ve ')} yukarı gidiyor.` : '';
+document.getElementById('lede').innerHTML =
+  `Güncel tabloda <b>${EX.length} deneme</b> var ve öğrenci bunlarda <b>${f0(totalMiss)} soru</b> kaçırmış. Ortalamalarla bir TYT'nin Türkçe + matematik + fen kısmında <span class="hl">${f1(coreAvg)} / 100</span> doğru yapıyor. Tablo şimdilik bir <b>plato</b> gösteriyor: hiçbir derste denemelerin ilk yarısından son yarısına belirgin bir artış yok.${platoNote} En hızlı kazanç ${mat?'<span class="hl hl-b">geometride</span>':''}${mat&&tr?' ve ':''}${tr?'<span class="hl hl-p">paragrafta</span>':''}.`;
+
+// ---- 1. karne ----
+function remark(p){ return p >= .85 ? 'Çok iyi, böyle devam!' : p >= .75 ? 'İyi, biraz daha zorla.' : p >= .65 ? 'Orta, düzenli tekrar şart.' : 'Öncelik burada!'; }
+function drawKarne(){
+  const el = document.getElementById('karne'); el.innerHTML = '';
+  const cards = S.map(s => ({s}));
+  cards.push({total:true});
+  cards.forEach((c,i) => {
+    const d = document.createElement('div'); d.className = 'kcard' + (c.total ? ' total' : '');
+    if (c.total) {
+      d.innerHTML = `<div class="frame"></div><div class="name">Tür + Mat + Fen</div><div class="big num"><span>${f1(coreAvg)}</span><small>/100</small></div><div class="meta">ders ortalamalarının toplamı</div><div class="remark">Sosyal henüz yok; tam TYT için 20 soru daha eklenecek.</div>`;
+    } else {
+      const s = c.s; d.style.setProperty('--c', penVar(s.name));
+      d.innerHTML = `<div class="frame"></div><div class="name">${s.name}</div><div class="big num"><span>${f1(s.avg)}</span><small>/${s.max}</small></div><div class="meta">${pct(s.pct)} · ${s.tests.length} deneme · en iyi ${Math.max(...s.tests.map(t=>t.c))}</div><div class="remark">${remark(s.pct)}</div><div class="spark"></div>`;
+    }
+    el.appendChild(d);
+    // frame
+    const fr = d.querySelector('.frame'), W = d.clientWidth, H = d.clientHeight;
+    const {svg, rc} = mk(fr, W, H); svg.setAttribute('preserveAspectRatio','none');
+    add(svg, rc.rectangle(3, 3, W-6, H-6, R({stroke: tok('--pencil'), strokeWidth: 1.3, roughness: 1.6})));
+    // circle around number
+    const big = d.querySelector('.big'), bw = big.clientWidth, bh = big.clientHeight;
+    const o = mk(big, bw + 32, bh + 16);
+    add(o.svg, o.rc.ellipse((bw+32)/2, (bh+16)/2, bw + 22, bh + 6, R({stroke: tok('--red'), strokeWidth: 2, roughness: 1.8})));
+    if (!c.total) {
+      const sp = d.querySelector('.spark'), sw = sp.clientWidth, sh = 46, s = c.s;
+      const g = mk(sp, sw, sh);
+      const lo = Math.min(...s.tests.map(t=>t.c)), hi = Math.max(...s.tests.map(t=>t.c));
+      const pts = s.tests.map((t,j) => [4 + j * (sw-8) / Math.max(1, s.tests.length-1), sh - 6 - (hi===lo ? .5 : (t.c-lo)/(hi-lo)) * (sh-12)]);
+      add(g.svg, g.rc.linearPath(pts, R({stroke: pen(s.name), strokeWidth: 2, roughness: .9})));
+      const last = pts[pts.length-1]; add(g.svg, g.rc.circle(last[0], last[1], 7, R({stroke: pen(s.name), fill: pen(s.name), fillStyle:'solid'})));
+    }
+  });
+  // sticky notes
+  const bio = G('Biyoloji'), kim = G('Kimya'), fen = ['Fizik','Kimya','Biyoloji'].map(G).filter(Boolean);
+  const notes = [];
+  if (mat) notes.push(['--note-b', -2.2, 'Geometri alarmı', `${geoMiss}/${mat.totalMiss}`, `Matematikte kaçan soruların yarısı geometriden: üçgen, dörtgen, katı cisimler ve çokgenler. Sadece 6 denemede bu kadar.`]);
+  if (tr) notes.push(['--note-p', 1.6, 'Paragraf', '%' + Math.round(para/tr.totalMiss*100), `Türkçede kaçanların ${para} tanesi paragrafta anlam. Her denemede ortalama ${f1(para/tr.tests.length)} paragraf sorusu gidiyor.`]);
+  if (bio) notes.push(['--note-g', -1.2, 'Biyoloji sağlam', `${bio.tests.filter(t=>t.c===bio.max).length}/${bio.tests.length}`, `${bio.tests.length} biyoloji denemesinin ${bio.tests.filter(t=>t.c===bio.max).length} tanesinde 6/6. En güvenilir ders.`]);
+  if (fen.length) { const fenEx = EX.filter(e => fen.every(s => e.subs[s.name])); const fv = fenEx.map(e => sum(fen.map(s => e.subs[s.name].c)));
+    notes.push(['--note-y', 2.4, 'Fen yerinde sayıyor', f1(mean(fv)) + '/20', `Fen toplamı ${Math.min(...fv)} ile ${Math.max(...fv)} arasında gidip geliyor, belirgin bir artış yok. Kimya son denemelerde toparlanıyor (${f1(mean(kim.tests.slice(-3).map(t=>t.c)))}/7).`]); }
+  document.getElementById('notes').innerHTML = notes.map(([bg,r,t,n,p]) => `<div class="note" style="--bg:var(${bg});--r:${r}deg"><div class="t">${t}</div><div class="n num">${n}</div><div>${p}</div></div>`).join('');
+}
+
+// ---- 1b. radar: first half vs second half of each subject's exams (h1/h2 computed above) ----
+function drawRadar(){
+  const el = document.getElementById('radar'); el.innerHTML = '';
+  const W = Math.min(el.clientWidth, 560), fs = W < 440 ? 19 : 24;
+  // leave room for the longest subject name on the left/right axes
+  const labW = Math.max(...S.map(s => s.name.length)) * fs * .42 + 26;
+  const Rr = Math.max(70, Math.min(W / 2 - labW, 210)), H = Math.round(Rr * 2 + fs * 2 + 50);
+  const {svg, rc} = mk(el, W, H); svg.style.margin = '0 auto';
+  const cx = W / 2, cy = Rr + fs + 26;
+  const vals = S.flatMap(s => [s.h1, s.h2]);
+  const lo = Math.max(0, Math.floor((Math.min(...vals) - .05) * 10) / 10);
+  const r = v => (Math.max(lo, v) - lo) / (1 - lo) * Rr;
+  const ang = i => -Math.PI / 2 + i * 2 * Math.PI / S.length;
+  const P = (i, v) => [cx + r(v) * Math.cos(ang(i)), cy + r(v) * Math.sin(ang(i))];
+  const every = r(lo + .1) < 22 ? 2 : 1;
+  for (let k = 1, v = lo + .1; v <= 1.0001; k++, v += .1) {
+    add(svg, rc.polygon(S.map((s,i) => P(i, v)), R({stroke: tok('--faint'), strokeWidth: v > .999 ? 1.8 : 1, roughness: .8})));
+    if (k % every === 0 || v > .999) text(svg, cx + 5, cy - r(v) + 14, pct(v), 'axis');
+  }
+  S.forEach((s,i) => {
+    const [x2, y2] = P(i, 1);
+    add(svg, rc.line(cx, cy, x2, y2, R({stroke: tok('--faint'), strokeWidth: 1, roughness: .7})));
+    const lx = cx + (Rr + 16) * Math.cos(ang(i)), ly = cy + (Rr + 16) * Math.sin(ang(i));
+    const c = Math.cos(ang(i)), sn = Math.sin(ang(i));
+    text(svg, lx, ly + (sn < -.9 ? -4 : sn > .5 ? fs * .8 : fs * .3), s.name, 'plabel', {'text-anchor': Math.abs(c) < .2 ? 'middle' : c > 0 ? 'start' : 'end', fill: pen(s.name), style: `font-size:${fs}px`});
+  });
+  add(svg, rc.polygon(S.map((s,i) => P(i, s.h1)), R({stroke: tok('--red'), strokeWidth: 1.8, strokeLineDash: [7, 6], roughness: 1})));
+  add(svg, rc.polygon(S.map((s,i) => P(i, s.h2)), R({stroke: tok('--ink'), strokeWidth: 2.6, fill: tok('--ink'), fillStyle: 'hachure', hachureGap: 8, fillWeight: .8, roughness: 1.1})));
+  S.forEach((s,i) => {
+    [[s.h1, 'red', 'İlk yarı'], [s.h2, 'ink', 'Son yarı']].forEach(([v, c, lab]) => {
+      const [px, py] = P(i, v);
+      add(svg, rc.circle(px, py, c === 'ink' ? 11 : 9, R({stroke: tok('--' + c), fill: c === 'ink' ? tok('--ink') : tok('--paper'), fillStyle: 'solid', strokeWidth: 1.8, roughness: .6})));
+      bindTip(hit(svg, px - 9, py - 9, 18, 18), `<b>${s.name}</b>${lab}: ${pct(v)}<br>${f1(v * s.max)}/${s.max} ortalama doğru`);
+    });
+  });
+  document.getElementById('radar-legend').innerHTML = `<span style="--c:var(--red)"><i class="dash"></i>ilk yarı</span><span style="--c:var(--ink)"><i></i>son yarı</span>`;
+  document.getElementById('radar-table').innerHTML = S.map(s => {
+    const d = Math.round((s.h2 - s.h1) * 100);
+    const col = d > 1 ? 'var(--p-bio)' : d < -1 ? 'var(--red)' : 'var(--muted)';
+    return `<div class="rt-row" style="--c:${penVar(s.name)}"><span class="n">${s.name}</span><span class="v">${pct(s.h1)} → <b>${pct(s.h2)}</b></span><span class="d" style="color:${col}">${d > 0 ? '+' : ''}${d} ${d > 1 ? '↗' : d < -1 ? '↘' : '→'}</span></div>`;
+  }).join('') + `<div class="rt-note">Her dersin denemeleri ikiye bölündü: ilk yarının ortalaması ile son yarının ortalaması. Puan farkı yüzde puanı.</div>`;
+}
+
+// ---- 2. per-subject charts ----
+function drawMulti(){
+  const el = document.getElementById('multi'); el.innerHTML = '';
+  S.forEach(s => {
+    const box = document.createElement('div'); box.style.setProperty('--c', penVar(s.name));
+    const sl = s.slope, dh = s.h2 - s.h1;
+    // call it a trend only when the regression slope and the half-vs-half change agree and the change is at least 3 points
+    const dir = Math.abs(dh) < .03 || Math.sign(dh) !== Math.sign(sl) ? 'yatay' : dh > 0 ? 'yükseliyor' : 'düşüyor';
+    box.innerHTML = `<div class="mhead"><h3 style="color:var(--c)">${s.name}</h3><span class="trend">eğilim: <b>${dir}</b> (${sl>=0?'+':''}${new Intl.NumberFormat('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}).format(sl)} doğru / deneme)</span></div><div class="chart"></div>`;
+    el.appendChild(box);
+    const ch = box.querySelector('.chart'), W = ch.clientWidth, H = 230, m = {t:30, r:16, b:30, l:34};
+    const {svg, rc} = mk(ch, W, H);
+    const n = EX.length;
+    const x = no => m.l + (no - .5) * (W - m.l - m.r) / n;
+    const lo = Math.max(0, Math.min(...s.tests.map(t=>t.c)) - (s.max>10?3:1)), hi = s.max;
+    const y = v => H - m.b - (v - lo) / (hi - lo) * (H - m.t - m.b);
+    // axis
+    const step = s.max > 10 ? 5 : 1;
+    for (let v = Math.ceil(lo/step)*step; v <= hi; v += step) {
+      add(svg, rc.line(m.l, y(v), W - m.r, y(v), R({stroke: tok('--grid'), strokeWidth: v===hi?1.6:1, roughness:.6})));
+      text(svg, m.l - 8, y(v) + 4, v, 'axis', {'text-anchor':'end'});
+    }
+    EX.forEach(e => { if (e.no === 1 || e.no % (n > 12 ? 3 : 1) === 0) text(svg, x(e.no), H - 8, e.no, 'axis', {'text-anchor':'middle'}); });
+    text(svg, m.l - 8, H - 8, 'dnm', 'axis', {'text-anchor':'end'});
+    // not-solved shading
+    EX.filter(e => !e.subs[s.name]).forEach(e => add(svg, rc.rectangle(x(e.no) - (W-m.l-m.r)/n/2 + 1, m.t, (W-m.l-m.r)/n - 2, H - m.t - m.b, R({stroke:'none', fill: tok('--faint'), fillStyle:'hachure', hachureGap: 7, fillWeight: .6, roughness:.8}))));
+    // trend line
+    const idx = s.tests.map((t,i) => i), my = s.avg, mx = (s.tests.length-1)/2;
+    const t0 = s.tests[0], t1 = s.tests[s.tests.length-1];
+    add(svg, rc.line(x(t0.no), y(my - s.slope*mx), x(t1.no), y(my + s.slope*mx), R({stroke: pen(s.name), strokeWidth: 1.4, strokeLineDash:[7,6], roughness:.5})));
+    // line + points
+    add(svg, rc.linearPath(s.tests.map(t => [x(t.no), y(t.c)]), R({stroke: pen(s.name), strokeWidth: 2.4, roughness: 1})));
+    const best = Math.max(...s.tests.map(t=>t.c)), worst = Math.min(...s.tests.map(t=>t.c));
+    const bestT = s.tests.find(t => t.c === best), worstT = s.tests.find(t => t.c === worst);
+    if (best !== worst) {
+      add(svg, rc.circle(x(bestT.no), y(best), 24, R({stroke: tok('--p-bio'), strokeWidth: 1.8, roughness: 1.6})));
+      add(svg, rc.circle(x(worstT.no), y(worst), 24, R({stroke: tok('--red'), strokeWidth: 1.8, roughness: 1.6})));
+    }
+    s.tests.forEach(t => {
+      add(svg, rc.circle(x(t.no), y(t.c), 9, R({stroke: pen(s.name), fill: tok('--paper'), fillStyle:'solid', strokeWidth: 1.8, roughness:.7})));
+      const ring = (t === bestT || t === worstT) && best !== worst;
+      text(svg, x(t.no), y(t.c) - (ring ? 17 : 11), t.c, 'plabel', {'text-anchor':'middle', fill: tok('--pencil')});
+      bindTip(hit(svg, x(t.no) - 10, y(t.c) - 26, 20, 38), () => examTip(byX.get(t.x)));
+    });
+  });
+}
+
+// ---- 3a. stacked full exams ----
+function drawStack(){
+  const el = document.getElementById('stack'); el.innerHTML = '';
+  const W = el.clientWidth, H = 320, m = {t:34, r:8, b:30, l:34};
+  const {svg, rc} = mk(el, W, H);
+  if (!coreEx.length) { text(svg, 10, 40, 'Beş dersin birlikte çözüldüğü deneme yok.', 'hand', {fill: tok('--muted')}); return; }
+  const y = v => H - m.b - v / 100 * (H - m.t - m.b);
+  [0,20,40,60,80,100].forEach(v => { add(svg, rc.line(m.l, y(v), W - m.r, y(v), R({stroke: tok('--grid'), strokeWidth: 1, roughness:.5}))); text(svg, m.l - 8, y(v) + 4, v, 'axis', {'text-anchor':'end'}); });
+  const bw = Math.min(64, (W - m.l - m.r) / coreEx.length * .62), gap = (W - m.l - m.r) / coreEx.length;
+  coreEx.forEach((e,i) => {
+    let acc = 0; const cx = m.l + gap * (i + .5);
+    CORE.forEach(n => {
+      const v = e.subs[n].c; const y0 = y(acc), y1 = y(acc + v); acc += v;
+      const r = add(svg, rc.rectangle(cx - bw/2, y1, bw, y0 - y1, R({stroke: pen(n), strokeWidth: 1.2, fill: pen(n), fillStyle: 'hachure', hachureGap: 4.5, fillWeight: 1.3, hachureAngle: -41 + i*7, roughness: 1})));
+    });
+    text(svg, cx, y(e.core) - 10, e.core, 'plabel', {'text-anchor':'middle', fill: tok('--pencil'), style:'font-size:26px'});
+    text(svg, cx, H - 8, e.no + '. dnm', 'axis', {'text-anchor':'middle'});
+    bindTip(hit(svg, cx - bw/2, y(e.core) - 30, bw, y(0) - y(e.core) + 30), () => examTip(e));
+  });
+  const best = coreEx.reduce((a,b) => b.core > a.core ? b : a);
+  const bi = coreEx.indexOf(best), bx = m.l + gap * (bi + .5);
+  add(svg, rc.ellipse(bx, y(best.core) - 18, 58, 36, R({stroke: tok('--red'), strokeWidth: 1.8, roughness: 1.7})));
+  text(svg, Math.min(W - 70, bx + 20), m.t - 14, 'en iyisi!', 'hand', {fill: tok('--red')});
+  document.getElementById('stack-legend').innerHTML = CORE.map(n => `<span style="--c:${penVar(n)}"><i></i>${n}</span>`).join('');
+}
+
+// ---- 3b. overall success per exam ----
+function drawOverall(){
+  const el = document.getElementById('overall'); el.innerHTML = '';
+  const W = el.clientWidth, H = 320, m = {t:34, r:14, b:30, l:40};
+  const {svg, rc} = mk(el, W, H);
+  const n = EX.length, x = no => m.l + (no - .5) * (W - m.l - m.r) / n;
+  const vals = EX.map(e => e.overall), lo = Math.max(0, Math.floor((Math.min(...vals) - .05) * 10) / 10);
+  const y = v => H - m.b - (v - lo) / (1 - lo) * (H - m.t - m.b);
+  for (let v = lo; v <= 1.0001; v += .1) { add(svg, rc.line(m.l, y(v), W - m.r, y(v), R({stroke: tok('--grid'), strokeWidth: 1, roughness:.5}))); text(svg, m.l - 8, y(v) + 4, pct(v), 'axis', {'text-anchor':'end'}); }
+  EX.forEach(e => { if (e.no === 1 || e.no % (n > 12 ? 3 : 1) === 0) text(svg, x(e.no), H - 8, e.no, 'axis', {'text-anchor':'middle'}); });
+  // phases: shaded bands where the set of subjects is the same
+  const sig = e => S.filter(s => e.subs[s.name]).map(s => s.name).join('+');
+  let start = 0; const bands = [];
+  EX.forEach((e,i) => { if (i === EX.length - 1 || sig(EX[i+1]) !== sig(e)) { bands.push({a: EX[start], b: e, k: S.filter(s => e.subs[s.name]).length}); start = i + 1; } });
+  bands.forEach((b,i) => {
+    const xa = x(b.a.no) - (W-m.l-m.r)/n/2, xb = x(b.b.no) + (W-m.l-m.r)/n/2;
+    if (i) add(svg, rc.line(xa, m.t - 6, xa, H - m.b, R({stroke: tok('--faint'), strokeWidth: 1, strokeLineDash:[3,5], roughness:.4})));
+    text(svg, (xa + xb)/2, m.t - 12, b.k === 5 ? '5 ders' : b.k + ' ders', 'hand', {'text-anchor':'middle', fill: tok('--muted')});
+  });
+  add(svg, rc.linearPath(EX.map(e => [x(e.no), y(e.overall)]), R({stroke: tok('--ink'), strokeWidth: 2.6, roughness: 1})));
+  const avg = mean(vals);
+  add(svg, rc.line(m.l, y(avg), W - m.r, y(avg), R({stroke: tok('--red'), strokeWidth: 1.4, strokeLineDash:[6,6], roughness:.4})));
+  text(svg, m.l + 4, y(avg) - 7, 'ortalama ' + pct(avg), 'hand', {fill: tok('--red')});
+  EX.forEach(e => {
+    add(svg, rc.circle(x(e.no), y(e.overall), 7 + e.nsubs * 1.6, R({stroke: tok('--ink'), fill: tok('--paper'), fillStyle:'solid', strokeWidth: 1.6, roughness:.8})));
+    bindTip(hit(svg, x(e.no) - 10, y(e.overall) - 12, 20, 24), () => `<b>${e.no}. deneme · ${pct(e.overall)}</b>${examTip(e).replace(/^<b>.*?<\/b>/,'')}`);
+  });
+  document.getElementById('overall-legend').innerHTML = `<span style="--c:var(--ink)"><i></i>genel başarı</span><span style="--c:var(--red)"><i></i>ortalama</span><span>halka büyüdükçe o gün daha çok ders çözülmüş</span>`;
+}
+
+// ---- 4. tally ----
+function drawTally(){
+  const el = document.getElementById('tally'); el.innerHTML = '';
+  const all = []; S.forEach(s => s.miss.forEach((v,k) => { if (k !== 'Diğer') all.push({s: s.name, k, v, geo: s.geo.has(k)}); }));
+  all.sort((a,b) => b.v - a.v || a.k.localeCompare(b.k, 'tr'));
+  const top = all.slice(0, 16);
+  top.forEach(t => {
+    const row = document.createElement('div'); row.className = 'tally-row'; row.style.setProperty('--c', penVar(t.s)); row.style.setProperty('--hl', `var(${HL[t.s]})`);
+    row.innerHTML = `<div class="lab"><span>${t.k}</span><small>${t.s}${t.geo?' · geometri':''}</small></div><div class="marks"></div><div class="cnt num">${t.v}</div>`;
+    el.appendChild(row);
+    const mk_ = row.querySelector('.marks'); const groupW = 40, H = 34, groups = Math.ceil(t.v / 5), W = Math.max(40, groups * groupW);
+    const {svg, rc} = mk(mk_, W, H);
+    for (let i = 0; i < t.v; i++) {
+      const g = Math.floor(i / 5), k = i % 5, gx = g * groupW + 4;
+      if (k < 4) add(svg, rc.line(gx + k * 7, 5, gx + k * 7 + 1, H - 5, R({stroke: pen(t.s), strokeWidth: 2.2, roughness: 1.2})));
+      else add(svg, rc.line(gx - 5, H - 9, gx + 27, 8, R({stroke: pen(t.s), strokeWidth: 2.2, roughness: 1.2})));
+    }
+    bindTip(row, () => `<b>${t.k}</b>${t.s} · ${t.v} soru kaçtı<br>${S.find(s=>s.name===t.s).tests.filter(x=>x.m[t.k]).length} farklı denemede`);
+  });
+}
+
+// ---- 5. X map ----
+let cur = 'Hepsi';
+try { const v = localStorage.getItem('defter-xmap'); if (v) cur = v; } catch(e){}
+function buildTabs(){
+  const el = document.getElementById('tabs');
+  const names = ['Hepsi', ...S.map(s => s.name)];
+  if (!names.includes(cur)) cur = 'Hepsi';
+  el.innerHTML = names.map(n => `<button class="tab" aria-pressed="${n===cur}" style="--c:${n==='Hepsi'?'var(--ink)':penVar(n)}">${n}</button>`).join('');
+  el.querySelectorAll('.tab').forEach((b,i) => b.addEventListener('click', () => { cur = names[i]; try { localStorage.setItem('defter-xmap', cur); } catch(e){} el.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-pressed', x === b)); drawXmap(); }));
+}
+function drawXmap(){
+  const el = document.getElementById('xmap'); el.innerHTML = '';
+  const subs = cur === 'Hepsi' ? S : S.filter(s => s.name === cur);
+  const rows = [];
+  subs.forEach(s => {
+    const topics = [...s.miss.entries()].filter(([k]) => k !== 'Diğer').sort((a,b) => b[1] - a[1]).map(([k]) => k);
+    if (!topics.length) return;
+    rows.push({head: s.name});
+    (cur === 'Hepsi' ? topics.slice(0, 6) : topics).forEach(k => rows.push({s, k}));
+  });
+  const avail = document.querySelector('.xmap-wrap').clientWidth;
+  const labelW = Math.min(230, Math.max(150, avail * .3)), cell = Math.max(26, Math.min(40, (avail - labelW - 50) / EX.length)), rowH = 30, headH = 38;
+  let H = 30; rows.forEach(r => H += r.head ? headH : rowH);
+  const W = labelW + cell * EX.length + 50;
+  const {svg, rc} = mk(el, W, H + 6);
+  EX.forEach(e => text(svg, labelW + (e.no - .5) * cell, 18, e.no, 'axis', {'text-anchor':'middle'}));
+  text(svg, labelW + EX.length * cell + 12, 18, 'top.', 'axis');
+  let yy = 30;
+  rows.forEach(r => {
+    if (r.head) {
+      text(svg, 4, yy + 27, r.head, 'plabel', {fill: pen(r.head), style: 'font-size:26px'});
+      add(svg, rc.line(labelW - 6, yy + headH - 4, labelW + EX.length * cell, yy + headH - 4, R({stroke: pen(r.head), strokeWidth: 1.4, roughness: 1.2})));
+      yy += headH; return;
+    }
+    const s = r.s;
+    text(svg, labelW - 10, yy + rowH/2 + 5, r.k.length > 30 ? r.k.slice(0, 29) + '…' : r.k, null, {'text-anchor':'end', fill: tok('--pencil'), style:'font-size:14px'});
+    EX.forEach(e => {
+      const cx = labelW + (e.no - .5) * cell, cy = yy + rowH/2, t = e.subs[s.name];
+      if (!t) { add(svg, rc.rectangle(cx - cell/2 + 2, yy + 3, cell - 4, rowH - 6, R({stroke: 'none', fill: tok('--faint'), fillStyle: 'hachure', hachureGap: 5, fillWeight: .5, roughness: .6}))); return; }
+      const n = t.m[r.k] || 0;
+      if (!n) return;
+      const sz = n > 1 ? 7 : 9;
+      for (let j = 0; j < Math.min(n, 3); j++) {
+        const ox = n > 1 ? (j - (Math.min(n,3) - 1) / 2) * 9 : 0;
+        add(svg, rc.line(cx + ox - sz/2, cy - sz, cx + ox + sz/2, cy + sz, R({stroke: tok('--red'), strokeWidth: 2.4, roughness: 1.3})));
+        add(svg, rc.line(cx + ox + sz/2, cy - sz, cx + ox - sz/2, cy + sz, R({stroke: tok('--red'), strokeWidth: 2.4, roughness: 1.3})));
+      }
+      bindTip(hit(svg, cx - cell/2, yy, cell, rowH), `<b>${e.no}. deneme</b>${r.k}: ${n} soru kaçtı<br>${s.name} ${t.c}/${s.max} doğru`);
+    });
+    text(svg, labelW + EX.length * cell + 12, yy + rowH/2 + 6, s.miss.get(r.k), 'plabel', {fill: tok('--red')});
+    yy += rowH;
+  });
+}
+
+function drawAll(){ seed = 1; drawKarne(); drawRadar(); drawMulti(); drawStack(); drawOverall(); drawTally(); drawXmap(); }
+function start(){ buildTabs(); drawAll(); }
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
+let rt, lw = innerWidth;
+addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (Math.abs(innerWidth - lw) > 4) { lw = innerWidth; drawAll(); } }, 160); });
+new MutationObserver(drawAll).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', drawAll);
+})();
+</script>
