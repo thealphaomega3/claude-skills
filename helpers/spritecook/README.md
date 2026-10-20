@@ -1,12 +1,12 @@
 # SpriteCook access for agents
 
-- Key: `/Users/bt/.config/spritecook/api_key` (mode 600). Never print, copy, log or commit it.
-- Helper: `/Users/bt/.config/spritecook/sc.py`, stdlib only. It reads the key itself and talks to the SpriteCook MCP endpoint over HTTP.
+- Key: `~/.config/spritecook/api_key` (mode 600 on macOS/Linux; on Windows `%USERPROFILE%\.config\spritecook\api_key`). Never print, copy, log or commit it.
+- Helper: `~/.config/spritecook/sc.py`, stdlib only. It reads the key itself and talks to the SpriteCook MCP endpoint over HTTP.
 
 ```
-python3 /Users/bt/.config/spritecook/sc.py tools                      # list tool names
-python3 /Users/bt/.config/spritecook/sc.py get_credit_balance '{}'
-python3 /Users/bt/.config/spritecook/sc.py generate_game_art '{"prompt": "...", "edit_asset_id": "...", "model": "gpt-image-2", "resolution": "2K", "quality": "medium", "wait_seconds": 90}'
+python3 ~/.config/spritecook/sc.py tools                      # list tool names
+python3 ~/.config/spritecook/sc.py get_credit_balance '{}'
+python3 ~/.config/spritecook/sc.py generate_game_art '{"prompt": "...", "edit_asset_id": "...", "model": "gpt-image-2", "resolution": "2K", "quality": "medium", "wait_seconds": 90}'
 ```
 
 Traps:
